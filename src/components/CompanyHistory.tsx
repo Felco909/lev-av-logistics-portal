@@ -19,6 +19,7 @@ const VALUE_ICONS = [Users, Truck, Award, HeartHandshake];
 
 export default function CompanyHistory() {
   const { t, lang } = useLanguage();
+  const t3 = (ru: string, en: string, hy: string) => (lang === 'ru' ? ru : lang === 'hy' ? hy : en);
 
   return (
     <section id="history" className="relative py-20 sm:py-28 border-t border-white/10 overflow-hidden bg-[#08090b]">
@@ -88,7 +89,7 @@ export default function CompanyHistory() {
           <div className="text-center mb-12">
             <span className="text-xs font-mono text-orange-400 font-bold uppercase tracking-[2.5px] block">{t.history.timelineTitle}</span>
             <h3 className="font-serif text-2xl sm:text-4xl font-black uppercase text-white mt-1">
-              {lang === 'ru' ? 'Хронология индустриального роста' : 'Chronology of Growth'}
+              {t3('Хронология индустриального роста', 'Chronology of Growth', 'Արդյունաբերական աճի ժամանակագրություն')}
             </h3>
           </div>
 
@@ -125,7 +126,7 @@ export default function CompanyHistory() {
 
                   <div className="mt-6 pt-3 border-t border-white/5 flex items-center text-[10px] text-emerald-400 font-mono font-bold">
                     <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 mr-1.5 shrink-0" />
-                    <span>{lang === 'ru' ? 'Успешно реализовано' : 'Successfully Delivered'}</span>
+                    <span>{t3('Успешно реализовано', 'Successfully Delivered', 'Հաջողությամբ իրականացված')}</span>
                   </div>
                 </div>
               );
@@ -138,7 +139,7 @@ export default function CompanyHistory() {
           <div className="text-center mb-12">
             <span className="text-xs font-mono text-orange-400 uppercase tracking-[2.5px] font-bold block">{t.history.valuesTitle}</span>
             <h3 className="font-serif text-2xl sm:text-4xl font-black uppercase text-white mt-1">
-              {lang === 'ru' ? 'Ценности и стандарты LEV&AV' : 'Core Principles of LEV&AV'}
+              {t3('Ценности и стандарты LEV&AV', 'Core Principles of LEV&AV', 'LEV&AV-ի արժեքներն ու սկզբունքները')}
             </h3>
           </div>
 

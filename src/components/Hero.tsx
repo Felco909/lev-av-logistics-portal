@@ -49,6 +49,7 @@ interface HeroProps {
 
 export default function Hero({ onContactClick }: HeroProps) {
   const { t, lang } = useLanguage();
+  const t3 = (ru: string, en: string, hy: string) => (lang === 'ru' ? ru : lang === 'hy' ? hy : en);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   const scrollToSection = (id: string) => {
@@ -59,7 +60,8 @@ export default function Hero({ onContactClick }: HeroProps) {
   };
 
   const handleDownloadCard = () => {
-    const vCardData = `BEGIN:VCARD
+    const vCardData = t3(
+      `BEGIN:VCARD
 VERSION:3.0
 N:Avetisyan;Avetik;;;
 FN:Avetik Avetisyan (LEV&AV LLC)
@@ -72,7 +74,36 @@ EMAIL:avet_avet83@mail.ru
 ADR;TYPE=WORK:;;ул. Давид Бека 134/4;Ереван;;0087;Армения
 URL:https://levav.am
 NOTE:Международные грузоперевозки собственным автопарком по СНГ, Европе и Китаю с 2010 года.
-END:VCARD`;
+END:VCARD`,
+      `BEGIN:VCARD
+VERSION:3.0
+N:Avetisyan;Avetik;;;
+FN:Avetik Avetisyan (LEV&AV LLC)
+ORG:LEV&AV LLC (ООО «ЛЕВ ЭНД АВ»);
+TITLE:CEO / General Director
+TEL;TYPE=CELL,VOICE:+37494902007
+TEL;TYPE=WORK,VOICE:+37499902007
+EMAIL:levavlogistics@gmail.com
+EMAIL:avet_avet83@mail.ru
+ADR;TYPE=WORK:;;134/4 David Bek St.;Yerevan;;0087;Armenia
+URL:https://levav.am
+NOTE:International freight forwarding with our own fleet across the CIS, Europe and China since 2010.
+END:VCARD`,
+      `BEGIN:VCARD
+VERSION:3.0
+N:Avetisyan;Avetik;;;
+FN:Avetik Avetisyan (LEV&AV LLC)
+ORG:«ԼԵՎ ԵՎ ԱՎ» ՍՊԸ (LEV&AV LLC);
+TITLE:Գլխավոր տնօրեն / CEO
+TEL;TYPE=CELL,VOICE:+37494902007
+TEL;TYPE=WORK,VOICE:+37499902007
+EMAIL:levavlogistics@gmail.com
+EMAIL:avet_avet83@mail.ru
+ADR;TYPE=WORK:;;Դավիթ Բեկի փող. 134/4;Երևան;;0087;Հայաստան
+URL:https://levav.am
+NOTE:Միջազգային բեռնափոխադրումներ սեփական ավտոպարկով ԱՊՀ, Եվրոպա և Չինաստան ուղղություններով 2010 թվականից։
+END:VCARD`
+    );
 
     const blob = new Blob([vCardData], { type: 'text/vcard;charset=utf-8' });
     const url = URL.createObjectURL(blob);
@@ -397,7 +428,7 @@ END:VCARD`;
                         </div>
                         <div className="text-right">
                           <span className="text-[9px] font-mono text-[#666] uppercase tracking-wider block font-bold">
-                            {lang === 'ru' ? 'Сроки доставки' : 'Transit Time'}
+                            {t3('Сроки доставки', 'Transit Time', 'Առաքման ժամկետ')}
                           </span>
                           <span className="font-mono text-xs font-extrabold text-orange-400 bg-orange-500/10 border border-orange-500/30 px-2 py-0.5 inline-block mt-0.5">
                             {direction.speed}
@@ -489,7 +520,7 @@ END:VCARD`;
                   <div className="space-y-5">
                     <div className="flex items-center space-x-4 border-b border-white/10 pb-4">
                       <div className="h-14 w-14 bg-orange-500 text-black flex items-center justify-center font-mono font-black text-xl shrink-0">
-                        {lang === 'ru' ? 'АЗ' : 'AZ'}
+                        {t3('АЗ', 'AZ', 'ԱԶ')}
                       </div>
                       <div>
                         <span className="text-[9px] font-mono text-orange-400 uppercase tracking-widest font-extrabold block">{t.hero.ceoRole}</span>
@@ -553,7 +584,7 @@ END:VCARD`;
                   <div className="space-y-5">
                     <div className="flex items-center space-x-4 border-b border-white/10 pb-4">
                       <div className="h-14 w-14 bg-[#1e222c] border border-white/20 text-white flex items-center justify-center font-mono font-black text-xl shrink-0">
-                        {lang === 'ru' ? 'СВ' : 'SV'}
+                        {t3('СВ', 'SV', 'ՍՎ')}
                       </div>
                       <div>
                         <span className="text-[9px] font-mono text-amber-400 uppercase tracking-widest font-extrabold block">{t.hero.salesRole}</span>

@@ -4,6 +4,7 @@ import { useLanguage } from '../context/LanguageContext';
 
 export default function RequisitesSection() {
   const { t, lang } = useLanguage();
+  const t3 = (ru: string, en: string, hy: string) => (lang === 'ru' ? ru : lang === 'hy' ? hy : en);
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const [showToast, setShowToast] = useState(false);
 
@@ -18,7 +19,8 @@ export default function RequisitesSection() {
   };
 
   const handleCopyAll = () => {
-    const allRequisites = `ООО «ЛЕВ ЭНД АВ» (LEV&AV LLC)
+    const allRequisites = t3(
+      `ООО «ЛЕВ ЭНД АВ» (LEV&AV LLC)
 ИНН: 02248043
 Юр. адрес: РА, 0046 г. Ереван, ул. С. Таронци 3/1. Кв. 18
 Расчетный счет: 16600166153658
@@ -27,13 +29,35 @@ export default function RequisitesSection() {
 БИК / SWIFT: 044525631
 Генеральный директор: Аветик Зограбян Самвелович (+374 94 902007)
 Логистика и продажи: Саргис (+374 99 902007)
-Email: levavlogistics@gmail.com / avet_avet83@mail.ru`;
+Email: levavlogistics@gmail.com / avet_avet83@mail.ru`,
+      `LEV&AV LLC (ООО «ЛЕВ ЭНД АВ»)
+TIN: 02248043
+Legal address: RA, 0046 Yerevan, S. Tarontsi St. 3/1, Apt. 18
+Account: 16600166153658
+Bank: CJSC "EVOCABANK"
+Corr. account: 30101810300000000765
+BIC / SWIFT: 044525631
+CEO: Avetik Zohrabyan (+374 94 902007)
+Logistics & Sales: Sargis (+374 99 902007)
+Email: levavlogistics@gmail.com / avet_avet83@mail.ru`,
+      `«ԼԵՎ ԵՎ ԱՎ» ՍՊԸ (LEV&AV LLC)
+ՀՎՀՀ: 02248043
+Իրավաբանական հասցե: ՀՀ, 0046 ք. Երևան, Ս. Տարոնցու փող. 3/1, բն. 18
+Հաշվարկային հաշիվ: 16600166153658
+Բանկ: Էվոկաբանկ ՓԲԸ (CJSC "EVOCABANK")
+Թղթակցային հաշիվ: 30101810300000000765
+BIK / SWIFT: 044525631
+Գլխավոր տնօրեն: Ավետիք Զոհրաբյան Սամվելի (+374 94 902007)
+Լոգիստիկա և վաճառք: Սարգիս (+374 99 902007)
+Էլ. փոստ: levavlogistics@gmail.com / avet_avet83@mail.ru`
+    );
 
     handleCopy(allRequisites, 'all');
   };
 
   const handleDownloadCard = () => {
-    const cardText = `========================================================================
+    const cardText = t3(
+      `========================================================================
              КАРТОЧКА ПРЕДПРИЯТИЯ / COMPANY PROFILE CARD
                     ООО «ЛЕВ ЭНД АВ» (LEV&AV LLC)
 ========================================================================
@@ -65,7 +89,72 @@ Email: levavlogistics@gmail.com / avet_avet83@mail.ru`;
 G-mail:                   levavlogistics@gmail.com
 Доп. E-mail:              avet_avet83@mail.ru
 
-========================================================================`;
+========================================================================`,
+      `========================================================================
+                          COMPANY PROFILE CARD
+                    LEV&AV LLC (ООО «ЛЕВ ЭНД АВ»)
+========================================================================
+
+1. LEGAL DETAILS:
+------------------------------------------------------------------------
+Full legal name:          Limited Liability Company «LEV AND AV»
+                          (ООО «ЛЕВ ЭНД АВ»)
+Short name:               LEV&AV LLC (ООО «ЛЕВ ЭНД АВ»)
+Company TIN:              02248043
+Legal address:            RA, 0046 Yerevan, S. Tarontsi St. 3/1, Apt. 18
+Actual address:           RA, 0046 Yerevan, S. Tarontsi St. 3/1, Apt. 18
+
+2. BANK DETAILS:
+------------------------------------------------------------------------
+Account:                  16600166153658
+Bank:                     CJSC "EVOCABANK"
+Corr. account:            30101810300000000765
+BIC / SWIFT:              044525631
+Bank TIN:                 7718011918
+
+3. MANAGEMENT & CONTACTS:
+------------------------------------------------------------------------
+CEO:                      Avetik Zohrabyan
+Director (Avetik):        +374 94 902007
+Sales Manager (Sargis):   +374 99 902007
+Backup contacts:          +374 55 902007, +374 95 902007
+G-mail:                   levavlogistics@gmail.com
+Additional email:         avet_avet83@mail.ru
+
+========================================================================`,
+      `========================================================================
+                    ԸՆԿԵՐՈՒԹՅԱՆ ՔԱՐՏ / COMPANY PROFILE CARD
+                    «ԼԵՎ ԵՎ ԱՎ» ՍՊԸ (LEV&AV LLC)
+========================================================================
+
+1. ԻՐԱՎԱԲԱՆԱԿԱՆ ՏՎՅԱԼՆԵՐ.
+------------------------------------------------------------------------
+Լրիվ անվանում:            Սահմանափակ պատասխանատվությամբ ընկերություն «ԼԵՎ ԵՎ ԱՎ»
+                          (Limited Liability Company «LEV AND AV»)
+Կրճատ անվանում:           «ԼԵՎ ԵՎ ԱՎ» ՍՊԸ (LEV&AV LLC)
+Ընկերության ՀՎՀՀ / TIN:   02248043
+Իրավաբանական հասցե:       ՀՀ, 0046 ք. Երևան, Ս. Տարոնցու փող. 3/1, բն. 18
+Փաստացի հասցե:            ՀՀ, 0046 ք. Երևան, Ս. Տարոնցու փող. 3/1, բն. 18
+
+2. ԲԱՆԿԱՅԻՆ ՌԵԿՎԻԶԻՏՆԵՐ.
+------------------------------------------------------------------------
+Հաշվարկային հաշիվ:        16600166153658
+Բանկ:                     Էվոկաբանկ ՓԲԸ (CJSC "EVOCABANK")
+Թղթակցային հաշիվ:         30101810300000000765
+ԲԱԴԿ / SWIFT:              044525631
+Բանկի ՀՎՀՀ:                7718011918
+
+3. ՂԵԿԱՎԱՐՈՒԹՅՈՒՆ ԵՎ ԿՈՆՏԱԿՏՆԵՐ.
+------------------------------------------------------------------------
+Գլխավոր տնօրեն / CEO:     Ավետիք Զոհրաբյան Սամվելի (Avetik Zohrabyan)
+Տնօրեն (Ավետիք):          +374 94 902007
+Վաճառքի մենեջեր (Սարգիս): +374 99 902007
+Լրացուցիչ կոնտակտներ:     +374 55 902007, +374 95 902007
+G-mail:                   levavlogistics@gmail.com
+Լրաց. էլ. փոստ:           avet_avet83@mail.ru
+
+========================================================================`
+    );
 
     const blob = new Blob([cardText], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
@@ -81,7 +170,7 @@ G-mail:                   levavlogistics@gmail.com
   return (
     <section id="requisites" className="relative py-20 sm:py-28 border-t border-white/10 overflow-hidden bg-[#08090b]">
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center space-x-2 px-3 py-1 bg-orange-500/10 border border-orange-500/30 mb-3">
@@ -106,7 +195,7 @@ G-mail:                   levavlogistics@gmail.com
               className="bg-[#111318] hover:bg-[#181b22] border border-orange-500/40 hover:border-orange-500 text-white px-4 py-2 text-xs font-mono font-bold flex items-center space-x-2 transition cursor-pointer shadow-md"
             >
               <CreditCard className="h-3.5 w-3.5 text-orange-400" />
-              <span>{lang === 'ru' ? 'Скопировать ИНН: 02248043' : 'Copy TIN: 02248043'}</span>
+              <span>{t3('Скопировать ИНН: 02248043', 'Copy TIN: 02248043', 'Պատճենել ՀՎՀՀ. 02248043')}</span>
               {copiedField === 'tin-quick' ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5 text-[#777]" />}
             </button>
 
@@ -115,7 +204,7 @@ G-mail:                   levavlogistics@gmail.com
               className="bg-[#111318] hover:bg-[#181b22] border border-white/15 hover:border-orange-500 text-white px-4 py-2 text-xs font-mono font-bold flex items-center space-x-2 transition cursor-pointer shadow-md"
             >
               <Landmark className="h-3.5 w-3.5 text-amber-400" />
-              <span>{lang === 'ru' ? 'Р/С: 16600166153658' : 'Account: 16600166153658'}</span>
+              <span>{t3('Р/С: 16600166153658', 'Account: 16600166153658', 'Հ/Հ. 16600166153658')}</span>
               {copiedField === 'acc-quick' ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5 text-[#777]" />}
             </button>
 
@@ -124,7 +213,7 @@ G-mail:                   levavlogistics@gmail.com
               className="bg-orange-500 hover:bg-orange-600 text-black px-4 py-2 text-xs font-mono font-extrabold flex items-center space-x-2 transition cursor-pointer shadow-lg uppercase"
             >
               <FileText className="h-3.5 w-3.5" />
-              <span>{lang === 'ru' ? 'Скопировать все реквизиты' : 'Copy Full Requisites'}</span>
+              <span>{t3('Скопировать все реквизиты', 'Copy Full Requisites', 'Պատճենել բոլոր ռեկվիզիտները')}</span>
             </button>
           </div>
         </div>
@@ -153,8 +242,8 @@ G-mail:                   levavlogistics@gmail.com
 
           <div className="divide-y divide-white/10 font-mono text-xs">
             {t.requisites.items.map((req) => (
-              <div 
-                key={req.id} 
+              <div
+                key={req.id}
                 className="py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-4 hover:bg-white/[0.03] px-3 transition group"
               >
                 <span className="text-[#888] text-xs sm:w-1/3 shrink-0 font-mono uppercase font-bold">{req.label}:</span>
@@ -163,7 +252,7 @@ G-mail:                   levavlogistics@gmail.com
                   <button
                     onClick={() => handleCopy(req.value, req.id)}
                     className="text-[#666] hover:text-orange-400 p-1.5 transition shrink-0 cursor-pointer"
-                    title={lang === 'ru' ? 'Копировать' : 'Copy'}
+                    title={t3('Копировать', 'Copy', 'Պատճենել')}
                   >
                     {copiedField === req.id ? (
                       <span className="flex items-center text-emerald-400 text-[10px] space-x-1 font-mono font-bold">
@@ -192,7 +281,7 @@ G-mail:                   levavlogistics@gmail.com
         {showToast && (
           <div className="fixed bottom-24 right-6 z-50 bg-emerald-500 text-black px-4 py-3 font-mono text-xs font-bold shadow-2xl flex items-center space-x-2 animate-bounce">
             <Check className="h-4 w-4 stroke-[3]" />
-            <span>{lang === 'ru' ? 'Реквизиты скопированы в буфер обмена!' : 'Copied to clipboard!'}</span>
+            <span>{t3('Реквизиты скопированы в буфер обмена!', 'Copied to clipboard!', 'Ռեկվիզիտները պատճենվեցին սեղմատախտակին!')}</span>
           </div>
         )}
 
