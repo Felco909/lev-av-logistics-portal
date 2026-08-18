@@ -25,6 +25,7 @@ interface NavbarProps {
 
 export default function Navbar({ onContactClick }: NavbarProps) {
   const { t, lang, setLang } = useLanguage();
+  const t3 = (ru: string, en: string, hy: string) => (lang === 'ru' ? ru : lang === 'hy' ? hy : en);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('hero-section');
@@ -103,7 +104,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
           
           {/* Bold Industrial Brand Logo */}
           <div 
-            onClick={() => scrollTo('hero')} 
+            onClick={() => scrollTo('hero-section')}
             className="flex cursor-pointer items-center text-white transition hover:opacity-95 group"
             id="nav-logo"
           >
@@ -222,7 +223,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="xl:hidden flex items-center justify-center h-10 w-10 bg-[#111318] hover:bg-white/10 border border-white/15 text-white transition cursor-pointer"
-              aria-label="Toggle Navigation Menu"
+              aria-label={t3('Открыть/закрыть меню навигации', 'Toggle Navigation Menu', 'Փոխարկել նավիգացիայի ցանկը')}
               id="mobile-menu-toggle-btn"
             >
               {mobileMenuOpen ? (
@@ -266,14 +267,14 @@ export default function Navbar({ onContactClick }: NavbarProps) {
                       LEV<span className="text-orange-500 not-italic">&</span>AV
                     </span>
                     <span className="text-[8px] font-mono text-orange-400 tracking-widest uppercase block mt-1 font-bold">
-                      {lang === 'ru' ? '[ИНДУСТРИАЛЬНАЯ ЛОГИСТИКА]' : '[INDUSTRIAL FREIGHT]'}
+                      {t3('[ИНДУСТРИАЛЬНАЯ ЛОГИСТИКА]', '[INDUSTRIAL FREIGHT]', '[ԱՐԴՅՈՒՆԱԲԵՐԱԿԱՆ ԼՈԳԻՍՏԻԿԱ]')}
                     </span>
                   </div>
 
                   <button
                     onClick={() => setMobileMenuOpen(false)}
                     className="p-2 text-[#888] hover:text-white transition cursor-pointer"
-                    aria-label="Close menu"
+                    aria-label={t3('Закрыть меню', 'Close menu', 'Փակել ցանկը')}
                   >
                     <X className="h-6 w-6" />
                   </button>
@@ -282,7 +283,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
                 {/* Navigation Links List */}
                 <div className="space-y-1.5 mb-8">
                   <span className="text-[9px] font-mono uppercase tracking-[2.5px] text-[#666] px-3 block mb-2 font-bold">
-                    {lang === 'ru' ? 'РАЗДЕЛЫ САЙТА' : 'NAVIGATION'}
+                    {t3('РАЗДЕЛЫ САЙТА', 'NAVIGATION', 'ԿԱՅՔԻ ԲԱԺԻՆՆԵՐԸ')}
                   </span>
                   {navItems.map((item, idx) => {
                     const IconComponent = item.icon;
@@ -312,7 +313,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
                 {/* Direct Contacts In Drawer */}
                 <div className="space-y-3 p-4 bg-[#111318] border border-white/10 mb-6">
                   <span className="text-[9px] font-mono uppercase tracking-[2px] text-orange-400 font-bold block">
-                    {lang === 'ru' ? 'ПРЯМАЯ СВЯЗЬ / ДИСПЕТЧЕР' : 'DIRECT DISPATCH'}
+                    {t3('ПРЯМАЯ СВЯЗЬ / ДИСПЕТЧЕР', 'DIRECT DISPATCH', 'ՈՒՂԻՂ ԿԱՊ / ԴԻՍՊԵՏՉԵՐ')}
                   </span>
                   
                   <div className="space-y-2 text-xs">
@@ -320,7 +321,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
                       href="tel:+37494902007"
                       className="flex items-center justify-between text-white hover:text-orange-400 transition font-mono p-2 bg-black/40 border border-white/5"
                     >
-                      <span className="text-orange-400 font-mono text-[10px] uppercase font-bold">{lang === 'ru' ? 'Дирекция:' : 'Director:'}</span>
+                      <span className="text-orange-400 font-mono text-[10px] uppercase font-bold">{t3('Дирекция:', 'Director:', 'Տնօրինություն.')}</span>
                       <strong className="text-white font-extrabold">+374 94 902007</strong>
                     </a>
 
@@ -328,7 +329,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
                       href="tel:+37499902007"
                       className="flex items-center justify-between text-white hover:text-orange-400 transition font-mono p-2 bg-black/40 border border-white/5"
                     >
-                      <span className="text-[#888] font-mono text-[10px] uppercase">{lang === 'ru' ? 'Отдел продаж:' : 'Sales:'}</span>
+                      <span className="text-[#888] font-mono text-[10px] uppercase">{t3('Отдел продаж:', 'Sales:', 'Վաճառքի բաժին.')}</span>
                       <strong className="text-orange-400">+374 99 902007</strong>
                     </a>
                   </div>
@@ -371,8 +372,8 @@ export default function Navbar({ onContactClick }: NavbarProps) {
                 </button>
 
                 <div className="flex items-center justify-between text-[10px] font-mono text-[#777] px-1">
-                  <span>{lang === 'ru' ? 'ООО «ЛЕВ ЭНД АВ»' : 'LEV&AV LLC'}</span>
-                  <span className="text-orange-500 font-bold">{lang === 'ru' ? 'С 2010 ГОДА' : 'SINCE 2010'}</span>
+                  <span>{t3('ООО «ЛЕВ ЭНД АВ»', 'LEV&AV LLC', '«ԼԵՎ ԵՎ ԱՎ» ՍՊԸ')}</span>
+                  <span className="text-orange-500 font-bold">{t3('С 2010 ГОДА', 'SINCE 2010', '2010 ԹՎԱԿԱՆԻՑ')}</span>
                 </div>
               </div>
             </motion.div>
