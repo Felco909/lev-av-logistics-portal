@@ -60,10 +60,12 @@ G-mail:                   levavlogistics@gmail.com
 
   const navItems = [
     { id: 'hero-section', label: t.nav.about },
+    { id: 'advantages-section', label: t.nav.advantages },
+    { id: 'services-showcase', label: t.nav.services },
     { id: 'history', label: t.nav.history },
     { id: 'fleet', label: t.nav.fleet },
     { id: 'geography', label: t.nav.geography },
-    { id: 'advantages-section', label: t.nav.advantages },
+    { id: 'faq-section', label: t.nav.faq },
     { id: 'requisites', label: t.nav.requisites },
     { id: 'management-contacts-section', label: t.nav.contacts },
   ];
