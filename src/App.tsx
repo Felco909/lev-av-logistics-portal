@@ -24,33 +24,54 @@ function AppContent() {
 
   const handleSendTelegram = () => {
     const text = encodeURIComponent(
-      `🚚 Новая заявка с сайта LEV&AV Logistics:\n` +
-      `👤 Имя / Компания: ${contactName || 'Не указано'}\n` +
-      `📞 Телефон: ${contactPhone}\n` +
-      `📍 Маршрут: ${contactRoute || 'Требуется консультация'}\n` +
-      `⚖️ Вес / Объем: ${contactWeight || 'По запросу'}`
+      lang === 'ru'
+        ? `🚚 Новая заявка с сайта LEV&AV Logistics:\n` +
+          `👤 Имя / Компания: ${contactName || 'Не указано'}\n` +
+          `📞 Телефон: ${contactPhone}\n` +
+          `📍 Маршрут: ${contactRoute || 'Требуется консультация'}\n` +
+          `⚖️ Вес / Объем: ${contactWeight || 'По запросу'}`
+        : `🚚 New request from LEV&AV Logistics website:\n` +
+          `👤 Name / Company: ${contactName || 'Not specified'}\n` +
+          `📞 Phone: ${contactPhone}\n` +
+          `📍 Route: ${contactRoute || 'Consultation needed'}\n` +
+          `⚖️ Weight / Volume: ${contactWeight || 'On request'}`
     );
     return window.open(`https://t.me/+37499902007?text=${text}`, '_blank');
   };
 
   const handleSendWhatsApp = () => {
     const text = encodeURIComponent(
-      `Здравствуйте! Заявка на расчет перевозки LEV&AV:\n` +
-      `Имя: ${contactName}\n` +
-      `Телефон: ${contactPhone}\n` +
-      `Маршрут: ${contactRoute || 'Консультация'}\n` +
-      `Параметры груза: ${contactWeight || '-'}`
+      lang === 'ru'
+        ? `Здравствуйте! Заявка на расчет перевозки LEV&AV:\n` +
+          `Имя: ${contactName}\n` +
+          `Телефон: ${contactPhone}\n` +
+          `Маршрут: ${contactRoute || 'Консультация'}\n` +
+          `Параметры груза: ${contactWeight || '-'}`
+        : `Hello! Freight quote request for LEV&AV:\n` +
+          `Name: ${contactName}\n` +
+          `Phone: ${contactPhone}\n` +
+          `Route: ${contactRoute || 'Consultation'}\n` +
+          `Cargo details: ${contactWeight || '-'}`
     );
     return window.open(`https://wa.me/37499902007?text=${text}`, '_blank');
   };
 
   const handleSendEmail = () => {
-    const subject = encodeURIComponent(`Заявка на грузоперевозку: ${contactRoute || 'Консультация'}`);
+    const subject = encodeURIComponent(
+      lang === 'ru'
+        ? `Заявка на грузоперевозку: ${contactRoute || 'Консультация'}`
+        : `Freight request: ${contactRoute || 'Consultation'}`
+    );
     const body = encodeURIComponent(
-      `Имя / Компания: ${contactName}\n` +
-      `Телефон: ${contactPhone}\n` +
-      `Маршрут: ${contactRoute}\n` +
-      `Вес / Объем: ${contactWeight}\n`
+      lang === 'ru'
+        ? `Имя / Компания: ${contactName}\n` +
+          `Телефон: ${contactPhone}\n` +
+          `Маршрут: ${contactRoute}\n` +
+          `Вес / Объем: ${contactWeight}\n`
+        : `Name / Company: ${contactName}\n` +
+          `Phone: ${contactPhone}\n` +
+          `Route: ${contactRoute}\n` +
+          `Weight / Volume: ${contactWeight}\n`
     );
     window.location.href = `mailto:levavlogistics@gmail.com?subject=${subject}&body=${body}`;
   };
