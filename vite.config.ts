@@ -3,8 +3,11 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig} from 'vite';
 
-export default defineConfig(() => {
+export default defineConfig(({command}) => {
   return {
+    // GitHub Pages serves this as a project site under /lev-av-logistics-portal/,
+    // so production asset URLs need that prefix; the dev server stays at root.
+    base: command === 'build' ? '/lev-av-logistics-portal/' : '/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
