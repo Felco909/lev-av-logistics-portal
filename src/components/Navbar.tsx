@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Building2, 
-  History, 
-  Truck, 
-  MapPin, 
-  Award, 
-  FileText, 
-  Phone, 
-  Menu, 
-  X, 
-  Send, 
-  MessageCircle, 
+import {
+  Building2,
+  History,
+  Truck,
+  MapPin,
+  Award,
+  FileText,
+  Phone,
+  Menu,
+  X,
+  Send,
+  MessageCircle,
   Globe2,
-  ChevronRight
+  ChevronRight,
+  Layers,
+  HelpCircle
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion, AnimatePresence } from 'motion/react';
@@ -25,13 +27,16 @@ export default function Navbar({ onContactClick }: NavbarProps) {
   const { t, lang, setLang } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>('hero');
+  const [activeSection, setActiveSection] = useState<string>('hero-section');
 
   const navItems = [
-    { id: 'hero', label: t.nav.about, icon: Building2 },
+    { id: 'hero-section', label: t.nav.about, icon: Building2 },
+    { id: 'advantages-section', label: t.nav.advantages, icon: Award },
+    { id: 'services-showcase', label: t.nav.services, icon: Layers },
     { id: 'history', label: t.nav.history, icon: History },
     { id: 'fleet', label: t.nav.fleet, icon: Truck },
     { id: 'geography', label: t.nav.geography, icon: MapPin },
+    { id: 'faq-section', label: t.nav.faq, icon: HelpCircle },
     { id: 'requisites', label: t.nav.requisites, icon: FileText },
     { id: 'management-contacts-section', label: t.nav.contacts, icon: Phone },
   ];
@@ -41,13 +46,19 @@ export default function Navbar({ onContactClick }: NavbarProps) {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
+      // Must follow actual top-to-bottom document order: the loop below
+      // walks it back-to-front and stops at the first section whose top has
+      // been scrolled past, so an out-of-order list mis-highlights the nav.
       const sectionIds = [
-        'hero',
+        'hero-section',
+        'advantages-section',
+        'services-showcase',
+        'faq-section',
+        'management-contacts-section',
         'history',
         'fleet',
         'geography',
         'requisites',
-        'management-contacts-section',
       ];
 
       for (let i = sectionIds.length - 1; i >= 0; i--) {
@@ -68,7 +79,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
 
   const scrollTo = (id: string) => {
     setMobileMenuOpen(false);
-    if (id === 'hero') {
+    if (id === 'hero-section') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
