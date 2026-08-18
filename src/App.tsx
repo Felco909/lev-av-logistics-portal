@@ -12,6 +12,7 @@ import { Phone, X, Send, Check, MessageCircle, Mail, PhoneCall, ArrowRight, Shie
 
 function AppContent() {
   const { t, lang } = useLanguage();
+  const t3 = (ru: string, en: string, hy: string) => (lang === 'ru' ? ru : lang === 'hy' ? hy : en);
   // Floating contact modal state
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [contactName, setContactName] = useState('');
@@ -30,11 +31,17 @@ function AppContent() {
           `📞 Телефон: ${contactPhone}\n` +
           `📍 Маршрут: ${contactRoute || 'Требуется консультация'}\n` +
           `⚖️ Вес / Объем: ${contactWeight || 'По запросу'}`
-        : `🚚 New request from LEV&AV Logistics website:\n` +
-          `👤 Name / Company: ${contactName || 'Not specified'}\n` +
-          `📞 Phone: ${contactPhone}\n` +
-          `📍 Route: ${contactRoute || 'Consultation needed'}\n` +
-          `⚖️ Weight / Volume: ${contactWeight || 'On request'}`
+        : lang === 'hy'
+          ? `🚚 Նոր հայտ LEV&AV Logistics կայքից.\n` +
+            `👤 Անուն / Ընկերություն: ${contactName || 'Նշված չէ'}\n` +
+            `📞 Հեռախոս: ${contactPhone}\n` +
+            `📍 Երթուղի: ${contactRoute || 'Անհրաժեշտ է խորհրդատվություն'}\n` +
+            `⚖️ Քաշ / Ծավալ: ${contactWeight || 'Ըստ պահանջի'}`
+          : `🚚 New request from LEV&AV Logistics website:\n` +
+            `👤 Name / Company: ${contactName || 'Not specified'}\n` +
+            `📞 Phone: ${contactPhone}\n` +
+            `📍 Route: ${contactRoute || 'Consultation needed'}\n` +
+            `⚖️ Weight / Volume: ${contactWeight || 'On request'}`
     );
     return window.open(`https://t.me/+37499902007?text=${text}`, '_blank');
   };
@@ -47,20 +54,28 @@ function AppContent() {
           `Телефон: ${contactPhone}\n` +
           `Маршрут: ${contactRoute || 'Консультация'}\n` +
           `Параметры груза: ${contactWeight || '-'}`
-        : `Hello! Freight quote request for LEV&AV:\n` +
-          `Name: ${contactName}\n` +
-          `Phone: ${contactPhone}\n` +
-          `Route: ${contactRoute || 'Consultation'}\n` +
-          `Cargo details: ${contactWeight || '-'}`
+        : lang === 'hy'
+          ? `Բարև Ձեզ! Հայտ՝ LEV&AV փոխադրման հաշվարկի համար.\n` +
+            `Անուն: ${contactName}\n` +
+            `Հեռախոս: ${contactPhone}\n` +
+            `Երթուղի: ${contactRoute || 'Խորհրդատվություն'}\n` +
+            `Բեռի պարամետրեր: ${contactWeight || '-'}`
+          : `Hello! Freight quote request for LEV&AV:\n` +
+            `Name: ${contactName}\n` +
+            `Phone: ${contactPhone}\n` +
+            `Route: ${contactRoute || 'Consultation'}\n` +
+            `Cargo details: ${contactWeight || '-'}`
     );
     return window.open(`https://wa.me/37499902007?text=${text}`, '_blank');
   };
 
   const handleSendEmail = () => {
     const subject = encodeURIComponent(
-      lang === 'ru'
-        ? `Заявка на грузоперевозку: ${contactRoute || 'Консультация'}`
-        : `Freight request: ${contactRoute || 'Consultation'}`
+      t3(
+        `Заявка на грузоперевозку: ${contactRoute || 'Консультация'}`,
+        `Freight request: ${contactRoute || 'Consultation'}`,
+        `Հայտ բեռնափոխադրման համար: ${contactRoute || 'Խորհրդատվություն'}`
+      )
     );
     const body = encodeURIComponent(
       lang === 'ru'
@@ -68,10 +83,15 @@ function AppContent() {
           `Телефон: ${contactPhone}\n` +
           `Маршрут: ${contactRoute}\n` +
           `Вес / Объем: ${contactWeight}\n`
-        : `Name / Company: ${contactName}\n` +
-          `Phone: ${contactPhone}\n` +
-          `Route: ${contactRoute}\n` +
-          `Weight / Volume: ${contactWeight}\n`
+        : lang === 'hy'
+          ? `Անուն / Ընկերություն: ${contactName}\n` +
+            `Հեռախոս: ${contactPhone}\n` +
+            `Երթուղի: ${contactRoute}\n` +
+            `Քաշ / Ծավալ: ${contactWeight}\n`
+          : `Name / Company: ${contactName}\n` +
+            `Phone: ${contactPhone}\n` +
+            `Route: ${contactRoute}\n` +
+            `Weight / Volume: ${contactWeight}\n`
     );
     window.location.href = `mailto:levavlogistics@gmail.com?subject=${subject}&body=${body}`;
   };
@@ -140,7 +160,7 @@ function AppContent() {
         {showMessengerMenu && (
           <div className="bg-[#111318] border-2 border-orange-500 p-3 shadow-2xl space-y-2 text-xs font-mono animate-fade-in mb-1">
             <div className="text-[10px] text-orange-400 font-bold uppercase tracking-wider px-2 pb-1 border-b border-white/10">
-              {lang === 'ru' ? 'Быстрая связь 24/7' : 'Quick Connect 24/7'}
+              {t3('Быстрая связь 24/7', 'Quick Connect 24/7', 'Արագ կապ 24/7')}
             </div>
             <a
               href="https://t.me/+37499902007"
@@ -165,7 +185,7 @@ function AppContent() {
               className="flex items-center space-x-2.5 px-3 py-2 bg-white/5 hover:bg-white/20 transition text-white font-bold"
             >
               <PhoneCall className="h-4 w-4 text-orange-500" />
-              <span>{lang === 'ru' ? 'Позвонить директору' : 'Call Director'}</span>
+              <span>{t3('Позвонить директору', 'Call Director', 'Զանգահարել տնօրենին')}</span>
             </a>
             <button
               onClick={() => {
@@ -175,7 +195,7 @@ function AppContent() {
               className="w-full text-left flex items-center space-x-2.5 px-3 py-2 bg-orange-500 hover:bg-orange-600 text-black font-extrabold uppercase transition cursor-pointer"
             >
               <Mail className="h-4 w-4" />
-              <span>{lang === 'ru' ? 'Заявка на расчет' : 'Request Quote Form'}</span>
+              <span>{t3('Заявка на расчет', 'Request Quote Form', 'Հայտ հաշվարկի համար')}</span>
             </button>
           </div>
         )}
@@ -194,7 +214,7 @@ function AppContent() {
       {isContactOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4" id="callback-modal-overlay">
           <div className="relative w-full max-w-lg bg-[#111318] border-2 border-orange-500 p-6 sm:p-8 shadow-2xl animate-fade-in text-white">
-            
+
             {/* Close Button */}
             <button
               onClick={() => {
@@ -211,15 +231,17 @@ function AppContent() {
             {/* Header */}
             <div className="border-b border-white/10 pb-4 mb-5">
               <span className="text-[9px] font-mono text-orange-400 uppercase tracking-widest font-extrabold block">
-                {lang === 'ru' ? 'ПРЯМОЙ РАСЧЕТ И ЭКСПЕДИРОВАНИЕ' : 'DIRECT QUOTE & DISPATCH'}
+                {t3('ПРЯМОЙ РАСЧЕТ И ЭКСПЕДИРОВАНИЕ', 'DIRECT QUOTE & DISPATCH', 'ՈՒՂԻՂ ՀԱՇՎԱՐԿ ԵՎ ԷՔՍՊԵԴԻՏՈՐԱԿԱՆ ԾԱՌԱՅՈՒԹՅՈՒՆ')}
               </span>
               <h3 className="font-serif text-2xl font-bold uppercase text-white mt-1">
-                {lang === 'ru' ? 'Запрос ставки на перевозку' : 'Freight Rate Request'}
+                {t3('Запрос ставки на перевозку', 'Freight Rate Request', 'Փոխադրման սակագնի հարցում')}
               </h3>
               <p className="text-xs text-[#aaa] mt-1 font-mono">
-                {lang === 'ru' 
-                  ? 'Ответим за 10–15 минут с точной ставкой, графиком рейсов и условиями ЕАЭС / TIR.' 
-                  : 'Fast response within 10–15 mins with exact quote, timetable and EAEU/TIR conditions.'}
+                {t3(
+                  'Ответим за 10–15 минут с точной ставкой, графиком рейсов и условиями ЕАЭС / TIR.',
+                  'Fast response within 10–15 mins with exact quote, timetable and EAEU/TIR conditions.',
+                  'Կպատասխանենք 10–15 րոպեում՝ ճշգրիտ սակագնով, երթերի գրաֆիկով և ԵԱՏՄ / TIR պայմաններով։'
+                )}
               </p>
             </div>
 
@@ -230,16 +252,20 @@ function AppContent() {
                 </div>
                 <div>
                   <h4 className="text-base font-mono font-bold text-emerald-400 uppercase tracking-wider">
-                    {lang === 'ru' ? 'Заявка сформирована!' : 'Request Prepared!'}
+                    {t3('Заявка сформирована!', 'Request Prepared!', 'Հայտը ձևավորված է!')}
                   </h4>
                   <p className="text-xs text-[#bbb] mt-2 leading-relaxed font-mono">
                     {autoSendBlocked
-                      ? (lang === 'ru'
-                          ? 'Браузер заблокировал всплывающие окна, поэтому мы открыли черновик письма на levavlogistics@gmail.com — просто нажмите «Отправить» в почтовом клиенте. Либо разрешите всплывающие окна и нажмите одну из кнопок ниже:'
-                          : 'Your browser blocked pop-ups, so we opened a draft email to levavlogistics@gmail.com instead — just hit "Send" in your mail app. Or allow pop-ups and use a button below:')
-                      : (lang === 'ru'
-                          ? 'Telegram и WhatsApp уже открылись в новых вкладках с вашей заявкой — просто нажмите «Отправить» в чате. Ни один не открылся? Выберите канал ниже:'
-                          : 'Telegram and WhatsApp just opened in new tabs with your request — simply hit "Send" in the chat. Neither opened? Pick a channel below:')}
+                      ? t3(
+                          'Браузер заблокировал всплывающие окна, поэтому мы открыли черновик письма на levavlogistics@gmail.com — просто нажмите «Отправить» в почтовом клиенте. Либо разрешите всплывающие окна и нажмите одну из кнопок ниже:',
+                          'Your browser blocked pop-ups, so we opened a draft email to levavlogistics@gmail.com instead — just hit "Send" in your mail app. Or allow pop-ups and use a button below:',
+                          'Բրաուզերն արգելափակել է թռուցիկ պատուհանները, ուստի մենք բացեցինք նամակի սևագիրը levavlogistics@gmail.com հասցեով — պարզապես սեղմեք «Ուղարկել» ձեր փոստային ծրագրում։ Կամ թույլատրեք թռուցիկ պատուհանները և սեղմեք ստորև նշված կոճակներից մեկը՝'
+                        )
+                      : t3(
+                          'Telegram и WhatsApp уже открылись в новых вкладках с вашей заявкой — просто нажмите «Отправить» в чате. Ни один не открылся? Выберите канал ниже:',
+                          'Telegram and WhatsApp just opened in new tabs with your request — simply hit "Send" in the chat. Neither opened? Pick a channel below:',
+                          'Telegram-ը և WhatsApp-ը արդեն բացվել են նոր ներդիրներում՝ ձեր հայտով — պարզապես սեղմեք «Ուղարկել» չաթում։ Ոչ մեկը չբացվե՞ց։ Ընտրեք ալիքը ստորև՝'
+                        )}
                   </p>
                 </div>
 
@@ -265,7 +291,7 @@ function AppContent() {
                     className="bg-[#1e2330] hover:bg-white/20 border border-white/15 text-white py-3 px-3 text-xs font-mono font-bold uppercase flex items-center justify-center space-x-2 transition cursor-pointer sm:col-span-2"
                   >
                     <Mail className="h-4 w-4 text-orange-400" />
-                    <span>Отправить на levavlogistics@gmail.com</span>
+                    <span>{t3('Отправить на levavlogistics@gmail.com', 'Send to levavlogistics@gmail.com', 'Ուղարկել levavlogistics@gmail.com հասցեին')}</span>
                   </button>
                 </div>
 
@@ -281,19 +307,19 @@ function AppContent() {
                   }}
                   className="w-full bg-orange-500 hover:bg-orange-600 text-black text-xs font-mono uppercase tracking-widest py-3 font-black transition cursor-pointer mt-4"
                 >
-                  {lang === 'ru' ? 'Закрыть окно' : 'Close Window'}
+                  {t3('Закрыть окно', 'Close Window', 'Փակել պատուհանը')}
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label className="block text-[9px] font-mono font-bold text-[#888] uppercase tracking-wider mb-1.5">
-                    {lang === 'ru' ? 'Ваше имя / Компания *' : 'Name / Company *'}
+                    {t3('Ваше имя / Компания *', 'Name / Company *', 'Ձեր անունը / Ընկերությունը *')}
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder={lang === 'ru' ? 'Например: ООО «ТоргСнаб» / Армен' : 'e.g., Cargo Corp / John'}
+                    placeholder={t3('Например: ООО «ТоргСнаб» / Армен', 'e.g., Cargo Corp / John', 'Օրինակ՝ Արմեն («Ագրո-Էքսպորտ» ՍՊԸ)')}
                     value={contactName}
                     onChange={(e) => setContactName(e.target.value)}
                     className="w-full bg-[#08090b] border border-white/15 px-3.5 py-2.5 text-sm text-white placeholder-[#555] outline-none focus:border-orange-500 font-mono"
@@ -303,7 +329,7 @@ function AppContent() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[9px] font-mono font-bold text-[#888] uppercase tracking-wider mb-1.5">
-                      {lang === 'ru' ? 'Телефон / Мессенджер *' : 'Phone / WhatsApp *'}
+                      {t3('Телефон / Мессенджер *', 'Phone / WhatsApp *', 'Հեռախոս / Մեսենջեր *')}
                     </label>
                     <input
                       type="tel"
@@ -317,11 +343,11 @@ function AppContent() {
 
                   <div>
                     <label className="block text-[9px] font-mono font-bold text-[#888] uppercase tracking-wider mb-1.5">
-                      {lang === 'ru' ? 'Вес / Объем груза' : 'Weight / Volume'}
+                      {t3('Вес / Объем груза', 'Weight / Volume', 'Բեռի քաշը / Ծավալը')}
                     </label>
                     <input
                       type="text"
-                      placeholder={lang === 'ru' ? '20 тонн, 86 м³, 33 паллеты' : '20 tons, 86 m³'}
+                      placeholder={t3('20 тонн, 86 м³, 33 паллеты', '20 tons, 86 m³', '20 տոննա, 86 մ³, 33 պալլետ')}
                       value={contactWeight}
                       onChange={(e) => setContactWeight(e.target.value)}
                       className="w-full bg-[#08090b] border border-white/15 px-3.5 py-2.5 text-sm text-white placeholder-[#555] outline-none focus:border-orange-500 font-mono"
@@ -331,11 +357,11 @@ function AppContent() {
 
                 <div>
                   <label className="block text-[9px] font-mono font-bold text-[#888] uppercase tracking-wider mb-1.5">
-                    {lang === 'ru' ? 'Маршрут и тип груза' : 'Route & Cargo Type'}
+                    {t3('Маршрут и тип груза', 'Route & Cargo Type', 'Երթուղի և բեռի տեսակ')}
                   </label>
                   <input
                     type="text"
-                    placeholder={lang === 'ru' ? 'Ереван → Москва (Тент / Рефрижератор)' : 'Yerevan → Moscow (Reefer / Tent)'}
+                    placeholder={t3('Ереван → Москва (Тент / Рефрижератор)', 'Yerevan → Moscow (Reefer / Tent)', 'Երևան → Մոսկվա (Թենտ / Սառնարան)')}
                     value={contactRoute}
                     onChange={(e) => setContactRoute(e.target.value)}
                     className="w-full bg-[#08090b] border border-white/15 px-3.5 py-2.5 text-sm text-white placeholder-[#555] outline-none focus:border-orange-500 font-mono"
@@ -348,13 +374,13 @@ function AppContent() {
                     className="w-full bg-orange-500 hover:bg-orange-600 text-black font-mono font-black text-xs uppercase tracking-widest py-3.5 transition flex items-center justify-center space-x-2 cursor-pointer shadow-lg"
                   >
                     <Send className="h-3.5 w-3.5" />
-                    <span>{lang === 'ru' ? 'Рассчитать ставку за 15 минут' : 'Calculate Freight Rate'}</span>
+                    <span>{t3('Рассчитать ставку за 15 минут', 'Calculate Freight Rate', 'Հաշվարկել սակագինը 15 րոպեում')}</span>
                   </button>
                 </div>
 
                 <div className="flex items-center justify-center space-x-2 text-[10px] text-[#777] font-mono pt-1">
                   <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
-                  <span>{lang === 'ru' ? 'Гарантируем сохранность данных и расчет без спама' : 'Strict NDA & direct carrier rates'}</span>
+                  <span>{t3('Гарантируем сохранность данных и расчет без спама', 'Strict NDA & direct carrier rates', 'Երաշխավորում ենք տվյալների գաղտնիությունը և հաշվարկ առանց սպամի')}</span>
                 </div>
               </form>
             )}
