@@ -12,11 +12,9 @@ import {
   ChevronRight,
   Flame,
   Zap,
-  Activity,
   Send,
   MessageCircle,
   PhoneCall,
-  CheckCircle2,
   Compass
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -159,34 +157,6 @@ export default function GeographySection({ onRequestRouteQuote }: GeographySecti
     }
   };
 
-  // Live Border Checkpoints Monitor data
-  const checkpointsData = [
-    {
-      name: lang === 'ru' ? 'КПП «Верхний Ларс»' : 'Upper Lars Checkpoint',
-      route: lang === 'ru' ? 'Россия — Грузия (Главный коридор)' : 'Russia — Georgia (Main Corridor)',
-      status: lang === 'ru' ? 'ДВИЖЕНИЕ ОТКРЫТО • ШТАТНЫЙ РЕЖИМ' : 'TRAFFIC OPEN • NORMAL OPS',
-      statusType: 'normal',
-      weather: lang === 'ru' ? '+14°C, без осадков' : '+14°C, dry',
-      queue: lang === 'ru' ? 'Электронная очередь ~ 4-8 ч' : 'E-queue ~ 4-8 hrs',
-    },
-    {
-      name: lang === 'ru' ? 'КПП «Баграташен — Садахло»' : 'Bagratashen — Sadakhlo CP',
-      route: lang === 'ru' ? 'Армения — Грузия' : 'Armenia — Georgia',
-      status: lang === 'ru' ? 'РАБОТАЕТ 24/7 • БЕЗ ЗАДЕРЖЕК' : 'OPEN 24/7 • NO DELAYS',
-      statusType: 'success',
-      weather: lang === 'ru' ? '+22°C, ясно' : '+22°C, clear',
-      queue: lang === 'ru' ? 'Минимальное время пропуска' : 'Minimal wait time',
-    },
-    {
-      name: lang === 'ru' ? 'КПП «Мегри — Нордуз»' : 'Meghri — Norduz CP',
-      route: lang === 'ru' ? 'Армения — Иран (Южный коридор)' : 'Armenia — Iran (South Corridor)',
-      status: lang === 'ru' ? 'КРУГЛОСУТОЧНО • ТЕРМОКОНТРОЛЬ' : 'ROUND-THE-CLOCK • REEFERS ACTIVE',
-      statusType: 'success',
-      weather: lang === 'ru' ? '+26°C, ясно' : '+26°C, clear',
-      queue: lang === 'ru' ? 'Прямой пропуск TIR' : 'Direct TIR clearance',
-    },
-  ];
-
   return (
     <section id="geography" className="relative py-20 sm:py-28 border-t border-white/10 overflow-hidden bg-[#08090b]">
       {/* Background Ambience */}
@@ -295,52 +265,6 @@ export default function GeographySection({ onRequestRouteQuote }: GeographySecti
             selectedCategory={GRID_TO_MAP_CATEGORY[activeCategory]}
             onSelectRoute={(routeName) => handleRouteAction(routeName)}
           />
-        </div>
-
-        {/* Live Border Checkpoints Status Monitor */}
-        <div className="mb-12 bg-[#111318] border-2 border-white/15 p-6 sm:p-8 shadow-2xl relative">
-          <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-white/10 pb-4 mb-6 gap-3">
-            <div className="flex items-center space-x-3">
-              <div className="h-3 w-3 bg-emerald-500 rounded-none animate-pulse shrink-0" />
-              <div>
-                <span className="font-mono text-xs font-bold text-orange-400 uppercase tracking-widest block">
-                  {lang === 'ru' ? 'ОПЕРАТИВНЫЙ МОНИТОРИНГ ГРАНИЦ И КПП' : 'LIVE BORDER CHECKPOINT MONITOR'}
-                </span>
-                <span className="text-[11px] text-[#aaa] font-mono">
-                  {lang === 'ru' ? 'Актуальный статус транзитных узлов в режиме реального времени' : 'Real-time border transit status & operational conditions'}
-                </span>
-              </div>
-            </div>
-            <div className="inline-flex items-center space-x-2 font-mono text-[10px] text-[#888] bg-black/40 px-3 py-1.5 border border-white/10">
-              <Activity className="h-3.5 w-3.5 text-emerald-400" />
-              <span>{lang === 'ru' ? 'Диспетчерская служба 24/7' : 'Dispatch Control 24/7'}</span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {checkpointsData.map((cp, idx) => (
-              <div key={idx} className="bg-black/40 border border-white/10 p-4 space-y-3 relative">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h4 className="font-serif text-lg font-bold text-white uppercase">{cp.name}</h4>
-                    <p className="text-[10px] text-orange-400 font-mono font-bold mt-0.5">{cp.route}</p>
-                  </div>
-                  <span className="h-2 w-2 bg-emerald-400 rounded-full animate-ping" />
-                </div>
-
-                <div className="pt-2 border-t border-white/5 space-y-1.5 text-xs font-mono">
-                  <div className="flex items-center space-x-1.5 text-emerald-400 font-bold text-[11px]">
-                    <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
-                    <span>{cp.status}</span>
-                  </div>
-                  <div className="flex justify-between text-[10px] text-[#aaa] pt-1">
-                    <span>{lang === 'ru' ? 'Очередь:' : 'Queue:'} <strong className="text-white">{cp.queue}</strong></span>
-                    <span>{cp.weather}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* Routes Industrial Grid */}
