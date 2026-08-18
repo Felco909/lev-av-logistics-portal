@@ -28,5 +28,5 @@ export default function CountryLayer({ pathGenerator, mapPreset }: CountryLayerP
 
   if (!needsWorld || !land) return null;
 
-  return <path d={pathGenerator(land as any) || ''} fill="#171b21" stroke="#2a2f37" strokeWidth={0.6} vectorEffect="non-scaling-stroke" />;
+  return <path d={pathGenerator(land as any) || ''} fill="#232a34" stroke="#4a5568" strokeWidth={0.6} vectorEffect="non-scaling-stroke" />;
 }
