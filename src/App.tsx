@@ -19,14 +19,8 @@ function AppContent() {
   const [contactRoute, setContactRoute] = useState('');
   const [contactWeight, setContactWeight] = useState('');
   const [isContactSuccess, setIsContactSuccess] = useState(false);
+  const [autoSendBlocked, setAutoSendBlocked] = useState(false);
   const [showMessengerMenu, setShowMessengerMenu] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (contactName.trim() && contactPhone.trim()) {
-      setIsContactSuccess(true);
-    }
-  };
 
   const handleSendTelegram = () => {
     const text = encodeURIComponent(
@@ -36,7 +30,7 @@ function AppContent() {
       `📍 Маршрут: ${contactRoute || 'Требуется консультация'}\n` +
       `⚖️ Вес / Объем: ${contactWeight || 'По запросу'}`
     );
-    window.open(`https://t.me/+37499902007?text=${text}`, '_blank');
+    return window.open(`https://t.me/+37499902007?text=${text}`, '_blank');
   };
 
   const handleSendWhatsApp = () => {
@@ -47,7 +41,7 @@ function AppContent() {
       `Маршрут: ${contactRoute || 'Консультация'}\n` +
       `Параметры груза: ${contactWeight || '-'}`
     );
-    window.open(`https://wa.me/37499902007?text=${text}`, '_blank');
+    return window.open(`https://wa.me/37499902007?text=${text}`, '_blank');
   };
 
   const handleSendEmail = () => {
@@ -59,6 +53,29 @@ function AppContent() {
       `Вес / Объем: ${contactWeight}\n`
     );
     window.location.href = `mailto:levavlogistics@gmail.com?subject=${subject}&body=${body}`;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (contactName.trim() && contactPhone.trim()) {
+      // Fire both messenger deep links right away so the lead survives even if
+      // the visitor only has one of the two apps, or never touches the manual
+      // buttons on the success screen.
+      const tgWindow = handleSendTelegram();
+      const waWindow = handleSendWhatsApp();
+      const bothBlocked = !tgWindow && !waWindow;
+
+      // window.open silently returns null when the browser's pop-up blocker
+      // kicks in — that used to fail without any trace. If it happens here,
+      // fall back to mailto, which is a same-tab protocol navigation and
+      // isn't subject to pop-up blocking, so the lead still goes out.
+      if (bothBlocked) {
+        handleSendEmail();
+      }
+
+      setAutoSendBlocked(bothBlocked);
+      setIsContactSuccess(true);
+    }
   };
 
   return (
@@ -162,6 +179,7 @@ function AppContent() {
               onClick={() => {
                 setIsContactOpen(false);
                 setIsContactSuccess(false);
+                setAutoSendBlocked(false);
               }}
               className="absolute top-4 right-4 text-[#888] hover:text-white transition cursor-pointer p-1"
               id="close-callback-modal"
@@ -194,9 +212,13 @@ function AppContent() {
                     {lang === 'ru' ? 'Заявка сформирована!' : 'Request Prepared!'}
                   </h4>
                   <p className="text-xs text-[#bbb] mt-2 leading-relaxed font-mono">
-                    {lang === 'ru' 
-                      ? 'Отправьте данные напрямую дежурному логисту в один клик для мгновенного ответа:' 
-                      : 'Send directly to the dispatch officer in 1-click for immediate confirmation:'}
+                    {autoSendBlocked
+                      ? (lang === 'ru'
+                          ? 'Браузер заблокировал всплывающие окна, поэтому мы открыли черновик письма на levavlogistics@gmail.com — просто нажмите «Отправить» в почтовом клиенте. Либо разрешите всплывающие окна и нажмите одну из кнопок ниже:'
+                          : 'Your browser blocked pop-ups, so we opened a draft email to levavlogistics@gmail.com instead — just hit "Send" in your mail app. Or allow pop-ups and use a button below:')
+                      : (lang === 'ru'
+                          ? 'Telegram и WhatsApp уже открылись в новых вкладках с вашей заявкой — просто нажмите «Отправить» в чате. Ни один не открылся? Выберите канал ниже:'
+                          : 'Telegram and WhatsApp just opened in new tabs with your request — simply hit "Send" in the chat. Neither opened? Pick a channel below:')}
                   </p>
                 </div>
 
@@ -230,6 +252,7 @@ function AppContent() {
                   onClick={() => {
                     setIsContactOpen(false);
                     setIsContactSuccess(false);
+                    setAutoSendBlocked(false);
                     setContactName('');
                     setContactPhone('');
                     setContactRoute('');
