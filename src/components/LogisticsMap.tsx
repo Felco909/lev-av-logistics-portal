@@ -30,7 +30,7 @@ export default function LogisticsMap({ onSelectRoute, selectedCategory = 'all' }
 
   const [size, setSize] = useState({ width: 960, height: 520 });
   const [zoomK, setZoomK] = useState(1);
-  const [mapPreset, setMapPreset] = useState<MapPreset>('caucasus');
+  const [mapPreset, setMapPreset] = useState<MapPreset>('eurasia');
   const [selectedDestId, setSelectedDestId] = useState<string>(DESTINATIONS[1]?.id ?? DESTINATIONS[0].id);
   const [hoveredDestId, setHoveredDestId] = useState<string | null>(null);
   const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(!reduceMotion);
