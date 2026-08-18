@@ -93,7 +93,7 @@ END:VCARD`,
 VERSION:3.0
 N:Avetisyan;Avetik;;;
 FN:Avetik Avetisyan (LEV&AV LLC)
-ORG:«ԼԵՎ ԵՎ ԱՎ» ՍՊԸ (LEV&AV LLC);
+ORG:«ԼԵՎ ԸՆԴ ԱՎ» ՍՊԸ (LEV&AV LLC);
 TITLE:Գլխավոր տնօրեն / CEO
 TEL;TYPE=CELL,VOICE:+37494902007
 TEL;TYPE=WORK,VOICE:+37499902007

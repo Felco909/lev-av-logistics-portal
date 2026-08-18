@@ -372,7 +372,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
                 </button>
 
                 <div className="flex items-center justify-between text-[10px] font-mono text-[#777] px-1">
-                  <span>{t3('ООО «ЛЕВ ЭНД АВ»', 'LEV&AV LLC', '«ԼԵՎ ԵՎ ԱՎ» ՍՊԸ')}</span>
+                  <span>{t3('ООО «ЛЕВ ЭНД АВ»', 'LEV&AV LLC', '«ԼԵՎ ԸՆԴ ԱՎ» ՍՊԸ')}</span>
                   <span className="text-orange-500 font-bold">{t3('С 2010 ГОДА', 'SINCE 2010', '2010 ԹՎԱԿԱՆԻՑ')}</span>
                 </div>
               </div>
