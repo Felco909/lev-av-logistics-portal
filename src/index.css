@@ -1,10 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-serif: "Barlow Condensed", "Oswald", sans-serif;
-  --font-display: "Barlow Condensed", "Oswald", sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  /* "Noto Sans Armenian" is appended last in each stack as a glyph-coverage fallback — none of
+     Inter/Barlow Condensed/Oswald/JetBrains Mono cover Armenian (U+0530-058F), so without it
+     Armenian text would silently render in whatever font the OS happens to fall back to. */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Armenian", sans-serif;
+  --font-serif: "Barlow Condensed", "Oswald", "Noto Sans Armenian", sans-serif;
+  --font-display: "Barlow Condensed", "Oswald", "Noto Sans Armenian", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "Noto Sans Armenian", monospace;
   
   /* Subdued Industrial Muted Orange & Amber */
   --color-orange-300: #e8a572;

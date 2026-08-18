@@ -153,8 +153,8 @@ export default function Navbar({ onContactClick }: NavbarProps) {
           {/* Header Right Actions */}
           <div className="flex items-center space-x-2 sm:space-x-3" id="nav-actions">
             
-            {/* Language Switcher (RU / EN) */}
-            <div 
+            {/* Language Switcher (RU / EN / HY) */}
+            <div
               className="flex items-center bg-[#111318] border border-white/15 p-0.5 font-mono text-xs"
               id="lang-switcher"
             >
@@ -181,6 +181,18 @@ export default function Navbar({ onContactClick }: NavbarProps) {
                 id="lang-btn-en"
               >
                 EN
+              </button>
+              <button
+                onClick={() => setLang('hy')}
+                className={`px-2 sm:px-2.5 py-1 font-bold transition-all cursor-pointer ${
+                  lang === 'hy'
+                    ? 'bg-orange-500 text-black font-extrabold shadow-sm'
+                    : 'text-[#888] hover:text-white hover:bg-white/5'
+                }`}
+                title="Հայերեն"
+                id="lang-btn-hy"
+              >
+                HY
               </button>
             </div>
 

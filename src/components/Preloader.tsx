@@ -27,6 +27,13 @@ export default function Preloader({ onComplete, minDuration = 800 }: PreloaderPr
       'Loading fleet and transit corridors...',
       'Preparing LEV&AV interface...',
       'Ready'
+    ],
+    hy: [
+      'Համակարգի նախաձեռնում...',
+      'Լոգիստիկ ուղիների միացում...',
+      'Ավտոպարկի և երթուղիների բեռնում...',
+      'LEV&AV միջերեսի պատրաստում...',
+      'Պատրաստ է աշխատանքի'
     ]
   };
 
@@ -137,7 +144,11 @@ export default function Preloader({ onComplete, minDuration = 800 }: PreloaderPr
 
             {/* Location tagline */}
             <div className="mt-8 text-[9px] font-mono text-[#555] tracking-widest uppercase">
-              {lang === 'ru' ? 'СНГ • ЕВРОПА • КИТАЙ • С 2010 ГОДА' : 'CIS • EUROPE • CHINA • EST. 2010'}
+              {lang === 'ru'
+                ? 'СНГ • ЕВРОПА • КИТАЙ • С 2010 ГОДА'
+                : lang === 'hy'
+                  ? 'ԱՊՀ • ԵՎՐՈՊԱ • ՉԻՆԱՍՏԱՆ • 2010Թ-ԻՑ'
+                  : 'CIS • EUROPE • CHINA • EST. 2010'}
             </div>
 
           </div>
