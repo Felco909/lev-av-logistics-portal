@@ -23,9 +23,14 @@ import { useLanguage } from '../context/LanguageContext';
 import LogisticsMap from './LogisticsMap';
 import { FilterValue } from './map/DirectionFilter';
 
+// The card grid's "cis" tab bundles Russia + Georgia routes (Moscow, Krasnodar, Tbilisi) — a
+// broader grouping than the map's own category taxonomy, where 'cis' means Belarus specifically
+// and Georgia falls under 'caucasus'. There's no single map category that covers exactly the same
+// set, so this maps to 'russia' (2 of the 3 routes in that tab) rather than the literal-but-wrong
+// 'cis', which used to point the map at Belarus — a country not shown in that tab at all.
 const GRID_TO_MAP_CATEGORY: Record<'all' | 'cis' | 'iran' | 'europe' | 'china', FilterValue> = {
   all: 'all',
-  cis: 'cis',
+  cis: 'russia',
   iran: 'iran',
   europe: 'europe',
   china: 'asia',
