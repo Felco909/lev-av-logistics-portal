@@ -103,12 +103,17 @@ END:VCARD`;
   return (
     <div className="relative overflow-hidden text-[#f1f3f5] w-full min-h-screen m-0 p-0" id="hero-section">
       {/* Hero Background Image Layer (Positioned to show upper landscape, church & truck) */}
-      <div 
-        className="absolute inset-0 z-0 bg-cover bg-no-repeat pointer-events-none transition-all duration-300"
+      <div
+        // Capped at one viewport tall (not inset-0 / the full multi-section hero height) so
+        // `background-size: cover` scales against a sane box — left uncapped, the element
+        // stretched to the whole hero block (thousands of px on mobile, everything through the
+        // advantages/services/FAQ/contacts sections it contains), forcing an extreme zoom that
+        // rendered as a blank color instead of the photo. `fixed` attachment is also unreliable
+        // on mobile Safari, so the parallax effect is desktop-only via Tailwind's responsive variant.
+        className="absolute inset-x-0 top-0 h-screen z-0 bg-cover bg-no-repeat bg-scroll lg:bg-fixed pointer-events-none transition-all duration-300"
         style={{
           backgroundImage: `linear-gradient(to bottom, rgba(8, 9, 11, 0.40) 0%, rgba(8, 9, 11, 0.60) 40%, rgba(8, 9, 11, 0.90) 80%, rgba(8, 9, 11, 0.98) 100%), url('${import.meta.env.BASE_URL}images/hero-bg.png')`,
           backgroundPosition: 'center top',
-          backgroundAttachment: 'fixed',
         }}
       />
       

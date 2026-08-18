@@ -38,8 +38,16 @@ body {
   background-size: 28px 28px, 100% 100%, cover;
   background-position: 0 0, center center, center top;
   background-repeat: repeat, no-repeat, no-repeat;
-  background-attachment: fixed;
+  /* `fixed` attachment is unreliable on mobile Safari (image ends up mispositioned
+     or blank), so it's only enabled above the breakpoint where it's actually safe. */
+  background-attachment: scroll;
   font-family: var(--font-sans);
+}
+
+@media (min-width: 1024px) {
+  body {
+    background-attachment: fixed;
+  }
 }
 
 /* Keeps section tops clear of the sticky navbar (~65-73px) when jumped to
