@@ -197,18 +197,6 @@ export default function Navbar({ onContactClick }: NavbarProps) {
               </button>
             </div>
 
-            {/* Direct Phone Link — hidden for Armenian: its nav labels run noticeably
-                longer than RU/EN, and dropping this (redundant with the CTA button
-                right next to it) is what keeps the header from overflowing at 1440px. */}
-            <a
-              href="tel:+37494902007"
-              className={`${lang === 'hy' ? 'hidden' : 'hidden lg:flex'} items-center space-x-2 text-xs font-mono font-bold text-white hover:text-orange-400 transition ml-1 px-3 py-2 bg-[#111318] border border-white/15 hover:border-orange-500/50`}
-              title={lang === 'ru' ? 'Позвонить в офис' : lang === 'hy' ? 'Զանգահարել գրասենյակ' : 'Call Dispatch'}
-            >
-              <Phone className="h-3.5 w-3.5 text-orange-500" />
-              <span>+374 94 902007</span>
-            </a>
-
             {/* Quick Industrial CTA */}
             <button
               onClick={onContactClick}

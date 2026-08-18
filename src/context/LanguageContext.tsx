@@ -21,7 +21,6 @@ export const translations = {
       requisites: 'Реквизиты',
       contacts: 'Контакты',
       contactBtn: 'Связаться',
-      directPhone: 'Прямой звонок',
     },
     seo: {
       title: 'LEV&AV | Международные Грузоперевозки — Bold Industrial Logistics',
@@ -522,7 +521,6 @@ export const translations = {
       requisites: 'Requisites',
       contacts: 'Contacts',
       contactBtn: 'Contact Us',
-      directPhone: 'Direct Call',
     },
     seo: {
       title: 'LEV&AV | International Freight Forwarding — Bold Industrial Logistics',
@@ -1023,7 +1021,6 @@ export const translations = {
       requisites: 'Ռեկվիզիտներ',
       contacts: 'Կոնտակտներ',
       contactBtn: 'Կապ հաստատել',
-      directPhone: 'Ուղիղ զանգ',
     },
     seo: {
       title: 'LEV&AV | Միջազգային Բեռնափոխադրումներ — Bold Industrial Logistics',
