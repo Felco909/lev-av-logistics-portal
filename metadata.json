@@ -1,0 +1,6 @@
+{
+  "name": "LEV&AV Logistics Portal",
+  "description": "Официальный сайт-визитка транспортной компании LEV&AV LLC (ООО «ЛЕВ ЭНД АВ») — международные грузоперевозки собственным автопарком по СНГ, Европе и Китаю с 2010 года, тенты, рефрижераторы, таможенное оформление и прямые контакты руководства.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
