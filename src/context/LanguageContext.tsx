@@ -23,6 +23,10 @@ export const translations = {
       contactBtn: 'Связаться',
       directPhone: 'Прямой звонок',
     },
+    seo: {
+      title: 'LEV&AV | Международные Грузоперевозки — Bold Industrial Logistics',
+      description: 'LEV&AV Logistics — международные грузоперевозки собственным автопарком по России, СНГ, Европе и Китаю. Еврофуры, рефрижераторы, негабарит, таможенное сопровождение.',
+    },
     hero: {
       badge: 'Официальная визитка международной транспортной компании',
       title1: 'Международные грузоперевозки',
@@ -520,6 +524,10 @@ export const translations = {
       contactBtn: 'Contact Us',
       directPhone: 'Direct Call',
     },
+    seo: {
+      title: 'LEV&AV | International Freight Forwarding — Bold Industrial Logistics',
+      description: 'LEV&AV Logistics — international freight forwarding with our own fleet across Russia, the CIS, Europe and China. Curtainsiders, refrigerated trucks, oversized cargo, full customs clearance support.',
+    },
     hero: {
       badge: 'Official International Transport Company Portal',
       title1: 'International Freight Logistics',
@@ -1016,6 +1024,10 @@ export const translations = {
       contacts: 'Կոնտակտներ',
       contactBtn: 'Կապ հաստատել',
       directPhone: 'Ուղիղ զանգ',
+    },
+    seo: {
+      title: 'LEV&AV | Միջազգային Բեռնափոխադրումներ — Bold Industrial Logistics',
+      description: 'LEV&AV Logistics — միջազգային բեռնափոխադրումներ սեփական ավտոպարկով Ռուսաստանի, ԱՊՀ երկրների, Եվրոպայի և Չինաստանի ուղղություններով։ Եվրոկցիչներ, ռեֆրիժերատորներ, ոչ ստանդարտ բեռներ, մաքսային ձևակերպման լիարժեք ուղեկցում։',
     },
     hero: {
       badge: 'Միջազգային փոխադրումների ընկերության պաշտոնական այցեքարտ',
@@ -1529,6 +1541,39 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   };
 
   const t = translations[lang];
+
+  // Keep <html lang>, the document title and meta description in sync with the
+  // active language for accessibility and SEO (no per-language routing/URLs exist,
+  // so hreflang/canonical are deliberately not used — see project plan).
+  useEffect(() => {
+    document.documentElement.lang = lang;
+    document.title = t.seo.title;
+
+    const descriptionTag = document.querySelector('meta[name="description"]');
+    if (descriptionTag) {
+      descriptionTag.setAttribute('content', t.seo.description);
+    }
+
+    const ogTitleTag = document.querySelector('meta[property="og:title"]');
+    if (ogTitleTag) {
+      ogTitleTag.setAttribute('content', t.seo.title);
+    }
+
+    const ogDescriptionTag = document.querySelector('meta[property="og:description"]');
+    if (ogDescriptionTag) {
+      ogDescriptionTag.setAttribute('content', t.seo.description);
+    }
+
+    const twitterTitleTag = document.querySelector('meta[name="twitter:title"]');
+    if (twitterTitleTag) {
+      twitterTitleTag.setAttribute('content', t.seo.title);
+    }
+
+    const twitterDescriptionTag = document.querySelector('meta[name="twitter:description"]');
+    if (twitterDescriptionTag) {
+      twitterDescriptionTag.setAttribute('content', t.seo.description);
+    }
+  }, [lang, t]);
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, t }}>
