@@ -357,8 +357,8 @@ export default function Navbar({ onContactClick }: NavbarProps) {
                 </button>
 
                 <div className="flex items-center justify-between text-[10px] font-mono text-[#777] px-1">
-                  <span>ООО «ЛЕВ ЭНД АВ»</span>
-                  <span className="text-orange-500 font-bold">С 2010 ГОДА</span>
+                  <span>{lang === 'ru' ? 'ООО «ЛЕВ ЭНД АВ»' : 'LEV&AV LLC'}</span>
+                  <span className="text-orange-500 font-bold">{lang === 'ru' ? 'С 2010 ГОДА' : 'SINCE 2010'}</span>
                 </div>
               </div>
             </motion.div>
