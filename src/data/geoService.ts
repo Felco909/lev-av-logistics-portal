@@ -20,6 +20,7 @@ export interface ArmeniaHighway {
   ref: string;
   nameRu: string;
   nameEn: string;
+  nameHy: string;
   isNorthSouthCorridor: boolean;
   lengthKm: number;
   feature: GeoJSON.Feature<GeoJSON.LineString>;
@@ -40,6 +41,7 @@ export const ARMENIA_HIGHWAYS: ArmeniaHighway[] = [
     ref: 'M1',
     nameRu: 'Ереван — Гюмри — Баграташен (Грузия)',
     nameEn: 'Yerevan — Gyumri — Bavra (Georgia border)',
+    nameHy: 'Երևան — Գյումրի — Բավրա (Վրաստանի սահման)',
     isNorthSouthCorridor: false,
     lengthKm: 174,
     feature: lineFeature('M1', [
@@ -55,6 +57,7 @@ export const ARMENIA_HIGHWAYS: ArmeniaHighway[] = [
     ref: 'M2',
     nameRu: 'Ереван — Горис — Мегри (Иран) — Коридор «Север–Юг»',
     nameEn: 'Yerevan — Goris — Meghri (Iran) — North-South Corridor',
+    nameHy: 'Երևան — Գորիս — Մեղրի (Իրան) — «Հյուսիս–Հարավ» միջանցք',
     isNorthSouthCorridor: true,
     lengthKm: 384,
     feature: lineFeature('M2', [
@@ -72,6 +75,7 @@ export const ARMENIA_HIGHWAYS: ArmeniaHighway[] = [
     ref: 'M4',
     nameRu: 'Ереван — Севан — Дилижан — Иджеван',
     nameEn: 'Yerevan — Sevan — Dilijan — Ijevan',
+    nameHy: 'Երևան — Սևան — Դիլիջան — Իջևան',
     isNorthSouthCorridor: false,
     lengthKm: 145,
     feature: lineFeature('M4', [
@@ -87,6 +91,7 @@ export const ARMENIA_HIGHWAYS: ArmeniaHighway[] = [
     ref: 'M6',
     nameRu: 'Ванадзор — Алаверди — Баграташен (Грузия)',
     nameEn: 'Vanadzor — Alaverdi — Bagratashen (Georgia border)',
+    nameHy: 'Վանաձոր — Ալավերդի — Բագրատաշեն (Վրաստանի սահման)',
     isNorthSouthCorridor: false,
     lengthKm: 90,
     feature: lineFeature('M6', [
