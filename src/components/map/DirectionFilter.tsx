@@ -11,17 +11,18 @@ interface DirectionFilterProps {
   onChange: (value: FilterValue) => void;
 }
 
-const CATEGORY_LABEL: Record<RouteCategory, { ru: string; en: string }> = {
-  europe: { ru: 'Европа', en: 'Europe' },
-  russia: { ru: 'Россия', en: 'Russia' },
-  cis: { ru: 'СНГ', en: 'CIS' },
-  caucasus: { ru: 'Кавказ', en: 'Caucasus' },
-  iran: { ru: 'Иран', en: 'Iran' },
-  asia: { ru: 'Азия', en: 'Asia' },
+const CATEGORY_LABEL: Record<RouteCategory, { ru: string; en: string; hy: string }> = {
+  europe: { ru: 'Европа', en: 'Europe', hy: 'Եվրոպա' },
+  russia: { ru: 'Россия', en: 'Russia', hy: 'Ռուսաստան' },
+  cis: { ru: 'СНГ', en: 'CIS', hy: 'ԱՊՀ' },
+  caucasus: { ru: 'Кавказ', en: 'Caucasus', hy: 'Կովկաս' },
+  iran: { ru: 'Иран', en: 'Iran', hy: 'Իրան' },
+  asia: { ru: 'Азия', en: 'Asia', hy: 'Ասիա' },
 };
 
 export default function DirectionFilter({ routes, value, onChange }: DirectionFilterProps) {
   const { lang } = useLanguage();
+  const t3 = (ru: string, en: string, hy: string) => (lang === 'ru' ? ru : lang === 'hy' ? hy : en);
 
   const counts: Record<FilterValue, number> = { all: routes.length, europe: 0, russia: 0, cis: 0, caucasus: 0, iran: 0, asia: 0 };
   routes.forEach((r) => {
@@ -31,10 +32,10 @@ export default function DirectionFilter({ routes, value, onChange }: DirectionFi
   const options: FilterValue[] = ['all', ...ROUTE_CATEGORY_LIST];
 
   return (
-    <div role="group" aria-label={lang === 'ru' ? 'Фильтр направлений карты' : 'Map direction filter'} className="flex flex-wrap items-center gap-1 bg-black/50 p-1 border border-white/10">
+    <div role="group" aria-label={t3('Фильтр направлений карты', 'Map direction filter', 'Քարտեզի ուղղությունների զտիչ')} className="flex flex-wrap items-center gap-1 bg-black/50 p-1 border border-white/10">
       {options.map((opt) => {
         const isActive = value === opt;
-        const label = opt === 'all' ? (lang === 'ru' ? 'Все' : 'All') : lang === 'ru' ? CATEGORY_LABEL[opt].ru : CATEGORY_LABEL[opt].en;
+        const label = opt === 'all' ? t3('Все', 'All', 'Բոլորը') : t3(CATEGORY_LABEL[opt].ru, CATEGORY_LABEL[opt].en, CATEGORY_LABEL[opt].hy);
         return (
           <button
             key={opt}

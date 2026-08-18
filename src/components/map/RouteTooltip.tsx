@@ -12,6 +12,7 @@ interface RouteTooltipProps {
 
 export default function RouteTooltip({ dest, route, coords, width, height }: RouteTooltipProps) {
   const { lang } = useLanguage();
+  const t3 = (ru: string, en: string, hy: string) => (lang === 'ru' ? ru : lang === 'hy' ? hy : en);
   const leftPct = (coords[0] / width) * 100;
   const topPct = (coords[1] / height) * 100;
   const flip = leftPct > 62;
@@ -23,9 +24,9 @@ export default function RouteTooltip({ dest, route, coords, width, height }: Rou
       style={{ left: `${leftPct}%`, top: `${topPct}%`, transform: `translate(${flip ? '-104%' : '4%'}, -50%)` }}
     >
       <div className="font-mono text-[10px] font-black text-orange-400 uppercase tracking-wider whitespace-nowrap">
-        {lang === 'ru' ? route.labelRu : route.labelEn}
+        {t3(route.labelRu, route.labelEn, route.labelHy)}
       </div>
-      <div className="text-[10px] text-[#aaa] mt-0.5 whitespace-nowrap">{lang === 'ru' ? route.taglineRu : route.taglineEn}</div>
+      <div className="text-[10px] text-[#aaa] mt-0.5 whitespace-nowrap">{t3(route.taglineRu, route.taglineEn, route.taglineHy)}</div>
     </div>
   );
 }

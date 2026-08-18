@@ -32,7 +32,7 @@ export default function DestinationMarker({ dest, coords, isSelected, isHovered,
       onBlur={onHoverEnd}
       role="button"
       tabIndex={0}
-      aria-label={lang === 'ru' ? dest.name : dest.nameEn}
+      aria-label={lang === 'ru' ? dest.name : lang === 'hy' ? dest.nameHy : dest.nameEn}
       aria-pressed={isSelected}
       className="cursor-pointer focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-orange-400 focus-visible:outline-offset-4"
       onKeyDown={(e) => {
@@ -50,7 +50,7 @@ export default function DestinationMarker({ dest, coords, isSelected, isHovered,
 
       <g transform={`translate(${8 * inv}, ${3 * inv})`}>
         <text fill="#ffffff" fontSize={9.5 * inv} fontWeight="600" style={{ paintOrder: 'stroke', stroke: '#050b14', strokeWidth: 3 * inv }}>
-          {lang === 'ru' ? dest.name : dest.nameEn}
+          {lang === 'ru' ? dest.name : lang === 'hy' ? dest.nameHy : dest.nameEn}
         </text>
       </g>
     </g>

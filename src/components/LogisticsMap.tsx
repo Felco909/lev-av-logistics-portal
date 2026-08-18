@@ -21,6 +21,7 @@ export interface LogisticsMapProps {
 
 export default function LogisticsMap({ onSelectRoute, selectedCategory = 'all' }: LogisticsMapProps) {
   const { lang } = useLanguage();
+  const t3 = (ru: string, en: string, hy: string) => (lang === 'ru' ? ru : lang === 'hy' ? hy : en);
   const reduceMotion = useReducedMotion();
 
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -135,10 +136,10 @@ export default function LogisticsMap({ onSelectRoute, selectedCategory = 'all' }
   const hubXYRaw = projection([ARMENIA_HUB.lng, ARMENIA_HUB.lat]);
   const hubXY: [number, number] = hubXYRaw ? [hubXYRaw[0], hubXYRaw[1]] : [width / 2, height / 2];
 
-  const routeLabel = (route: LogisticsRoute) => (lang === 'ru' ? route.labelRu : route.labelEn);
+  const routeLabel = (route: LogisticsRoute) => t3(route.labelRu, route.labelEn, route.labelHy);
 
   const handleBooking = (route: LogisticsRoute) => {
-    const title = lang === 'ru' ? route.labelRu : route.labelEn;
+    const title = routeLabel(route);
     if (onSelectRoute) {
       onSelectRoute(title);
     } else {
@@ -166,17 +167,19 @@ export default function LogisticsMap({ onSelectRoute, selectedCategory = 'all' }
           <div className="inline-flex items-center space-x-2 px-3 py-1 bg-orange-500/10 border border-orange-500/30 mb-2">
             <span className="h-2 w-2 bg-orange-500 rounded-full animate-ping" />
             <span className="font-mono text-[11px] font-bold text-orange-400 uppercase tracking-widest">
-              {lang === 'ru' ? 'ИНТЕРАКТИВНАЯ КАРТА МАРШРУТОВ ИЗ АРМЕНИИ' : 'INTERACTIVE LOGISTICS MAP FROM ARMENIA'}
+              {t3('ИНТЕРАКТИВНАЯ КАРТА МАРШРУТОВ ИЗ АРМЕНИИ', 'INTERACTIVE LOGISTICS MAP FROM ARMENIA', 'ՀԱՅԱՍՏԱՆԻՑ ԵՐԹՈՒՂԻՆԵՐԻ ԻՆՏԵՐԱԿՏԻՎ ՔԱՐՏԵԶ')}
             </span>
           </div>
           <h3 className="font-serif text-2xl sm:text-3xl font-black uppercase text-white tracking-tight flex flex-wrap items-center gap-2">
-            <span>{lang === 'ru' ? 'Центральный хаб:' : 'Central Hub:'}</span>
-            <span className="text-orange-500">{lang === 'ru' ? 'Ереван ➔ Международные направления' : 'Yerevan ➔ Global Destinations'}</span>
+            <span>{t3('Центральный хаб:', 'Central Hub:', 'Կենտրոնական հաբ.')}</span>
+            <span className="text-orange-500">{t3('Ереван ➔ Международные направления', 'Yerevan ➔ Global Destinations', 'Երևան ➔ Միջազգային ուղղություններ')}</span>
           </h3>
           <p className="text-xs text-[#aaa] font-mono mt-1">
-            {lang === 'ru'
-              ? 'Перетаскивайте карту и крутите колесо для масштабирования, нажмите на город для деталей маршрута'
-              : 'Drag to pan, scroll to zoom, click any city for route details'}
+            {t3(
+              'Перетаскивайте карту и крутите колесо для масштабирования, нажмите на город для деталей маршрута',
+              'Drag to pan, scroll to zoom, click any city for route details',
+              'Քաշեք քարտեզը և պտտեք սկրոլը մասշտաբի համար, սեղմեք քաղաքի վրա՝ երթուղու մանրամասների համար'
+            )}
           </p>
         </div>
 
@@ -214,7 +217,11 @@ export default function LogisticsMap({ onSelectRoute, selectedCategory = 'all' }
               preserveAspectRatio="none"
               className="block select-none relative z-10 cursor-grab active:cursor-grabbing"
               role="img"
-              aria-label={lang === 'ru' ? 'Интерактивная карта международных маршрутов LEV&AV из Еревана' : 'Interactive LEV&AV international route map from Yerevan'}
+              aria-label={t3(
+                'Интерактивная карта международных маршрутов LEV&AV из Еревана',
+                'Interactive LEV&AV international route map from Yerevan',
+                'LEV&AV-ի միջազգային երթուղիների ինտերակտիվ քարտեզ Երևանից'
+              )}
             >
             <defs>
               <linearGradient id="armeniaGlow" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -260,15 +267,15 @@ export default function LogisticsMap({ onSelectRoute, selectedCategory = 'all' }
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-1.5">
                 <span className="h-2.5 w-2.5 bg-amber-400 rounded-full inline-block" />
-                <span className="text-white font-bold">{lang === 'ru' ? 'Главный хаб (Армения)' : 'HQ Hub (Armenia)'}</span>
+                <span className="text-white font-bold">{t3('Главный хаб (Армения)', 'HQ Hub (Armenia)', 'Գլխավոր հաբ (Հայաստան)')}</span>
               </div>
               <div className="flex items-center space-x-1.5">
                 <span className="h-2 w-2 rounded-full border border-white bg-sky-400/70 inline-block" />
-                <span>{lang === 'ru' ? 'Города и направления' : 'Cities & Destinations'}</span>
+                <span>{t3('Города и направления', 'Cities & Destinations', 'Քաղաքներ և ուղղություններ')}</span>
               </div>
             </div>
             <div className="text-orange-400 font-bold" aria-live="polite">
-              {visibleDestinations.length}+ {lang === 'ru' ? 'международных направлений' : 'international destinations'}
+              {visibleDestinations.length}+ {t3('международных направлений', 'international destinations', 'միջազգային ուղղություններ')}
             </div>
           </div>
         </div>
@@ -284,7 +291,7 @@ export default function LogisticsMap({ onSelectRoute, selectedCategory = 'all' }
           onClick={() => setMobileCardOpen(true)}
           className="w-full bg-black/40 border border-orange-500/40 text-orange-400 font-mono text-xs font-bold uppercase py-3 px-4 flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400"
         >
-          <span>{lang === 'ru' ? 'Открыть карточку маршрута' : 'Open route card'}</span>
+          <span>{t3('Открыть карточку маршрута', 'Open route card', 'Բացել երթուղու քարտը')}</span>
           {activeRoute && <span className="text-white">{routeLabel(activeRoute)}</span>}
         </button>
       </div>
@@ -300,7 +307,7 @@ export default function LogisticsMap({ onSelectRoute, selectedCategory = 'all' }
 
       <div className="mt-6 pt-4 border-t border-white/10">
         <span className="text-[10px] font-mono font-bold text-[#888] uppercase tracking-wider block mb-2">
-          {lang === 'ru' ? 'БЫСТРЫЙ ПЕРЕХОД ПО НАПРАВЛЕНИЯМ:' : 'QUICK JUMP TO DESTINATIONS:'}
+          {t3('БЫСТРЫЙ ПЕРЕХОД ПО НАПРАВЛЕНИЯМ:', 'QUICK JUMP TO DESTINATIONS:', 'ԱՐԱԳ ԱՆՑՈՒՄ ՈՒՂՂՈՒԹՅՈՒՆՆԵՐԻՆ.')}
         </span>
         <div className="flex flex-wrap gap-1.5">
           {visibleDestinations.map((dest) => {
@@ -318,7 +325,7 @@ export default function LogisticsMap({ onSelectRoute, selectedCategory = 'all' }
                 }`}
               >
                 <span className={`h-1.5 w-1.5 rounded-full ${isActive ? 'bg-black' : 'bg-orange-500'}`} />
-                <span>{lang === 'ru' ? dest.name : dest.nameEn}</span>
+                <span>{t3(dest.name, dest.nameEn, dest.nameHy)}</span>
               </button>
             );
           })}
