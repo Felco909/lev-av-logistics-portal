@@ -1,5 +1,5 @@
 import React from 'react';
-import { Download, Facebook, Instagram, Flame, ShieldCheck } from 'lucide-react';
+import { Download, Facebook, Instagram, Flame, Mail, Phone, ShieldCheck } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function Footer() {
@@ -244,6 +244,36 @@ G-mail:                   levavlogistics@gmail.com
             </div>
           </div>
 
+        </div>
+
+        <div className="pt-8 pb-8 border-t border-white/10">
+          <span className="text-[9px] font-mono text-orange-400 uppercase tracking-widest font-bold block mb-3">{t.footer.allContactsLabel}</span>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-mono text-[#aaa]">
+            <a href="tel:+37494902007" className="flex items-center space-x-1.5 hover:text-orange-400 transition">
+              <Phone className="h-3.5 w-3.5 text-orange-500 shrink-0" />
+              <span>+374 94 902007</span>
+            </a>
+            <a href="tel:+37499902007" className="flex items-center space-x-1.5 hover:text-orange-400 transition">
+              <Phone className="h-3.5 w-3.5 text-orange-500 shrink-0" />
+              <span>+374 99 902007</span>
+            </a>
+            <a href="tel:+37495902007" className="flex items-center space-x-1.5 hover:text-orange-400 transition">
+              <Phone className="h-3.5 w-3.5 text-orange-500 shrink-0" />
+              <span>+374 95 902007</span>
+            </a>
+            <a href="tel:+37455902007" className="flex items-center space-x-1.5 hover:text-orange-400 transition">
+              <Phone className="h-3.5 w-3.5 text-orange-500 shrink-0" />
+              <span>+374 55 902007</span>
+            </a>
+            <a href="mailto:levavlogistics@gmail.com" className="flex items-center space-x-1.5 hover:text-orange-400 transition break-all">
+              <Mail className="h-3.5 w-3.5 text-orange-500 shrink-0" />
+              <span>levavlogistics@gmail.com</span>
+            </a>
+            <a href="mailto:avet_avet83@mail.ru" className="flex items-center space-x-1.5 hover:text-orange-400 transition break-all">
+              <Mail className="h-3.5 w-3.5 text-orange-500 shrink-0" />
+              <span>avet_avet83@mail.ru</span>
+            </a>
+          </div>
         </div>
 
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-[#666] gap-4">
