@@ -151,11 +151,15 @@ END:VCARD`
         // mobile, which already sat correctly at plain top alignment.
         className="absolute inset-x-0 top-0 h-screen z-0 bg-contain lg:bg-[length:90%] bg-no-repeat bg-scroll lg:bg-fixed bg-top lg:[background-position:center_-60px] pointer-events-none transition-all duration-300"
         style={{
-          // Lighter than the previous overlay (was up to 0.98 near the bottom) so the truck/
-          // plane/ship illustration in the lower half of this image stays visible — text there
-          // sits in its own opaque/semi-opaque boxes (cards, buttons) rather than directly on
-          // the gradient, so contrast doesn't depend on this overlay being dark.
-          backgroundImage: `linear-gradient(to bottom, rgba(8, 9, 11, 0.30) 0%, rgba(8, 9, 11, 0.40) 25%, rgba(8, 9, 11, 0.55) 55%, rgba(8, 9, 11, 0.65) 100%), url('${import.meta.env.BASE_URL}images/hero-bg-neon.jpg')`,
+          // Lighter and flatter than the previous overlay (which ranged up to 0.65/0.98 near the
+          // bottom) — the source photo is itself much dimmer in its upper/sky portion than in the
+          // glowing truck/ship band lower down, and a steep gradient only widened that gap. A
+          // near-flat overlay plus a brightness/saturation boost on the whole layer (below) lifts
+          // the dim upper area so the image reads evenly instead of having a visible seam. Text
+          // sits in its own opaque/semi-opaque boxes (cards, buttons) rather than directly on the
+          // gradient, so contrast doesn't depend on this overlay being dark.
+          backgroundImage: `linear-gradient(to bottom, rgba(8, 9, 11, 0.20) 0%, rgba(8, 9, 11, 0.25) 40%, rgba(8, 9, 11, 0.30) 70%, rgba(8, 9, 11, 0.35) 100%), url('${import.meta.env.BASE_URL}images/hero-bg-neon.jpg')`,
+          filter: 'brightness(1.35) saturate(1.2) contrast(0.95)',
         }}
       />
       
@@ -469,7 +473,9 @@ END:VCARD`
           {/* FAQ Section */}
           <div className="mt-16 sm:mt-24 border-t border-white/10 pt-16" id="faq-section">
             <div className="text-center max-w-2xl mx-auto mb-10">
-              <span className="font-mono text-xs font-bold text-orange-400 uppercase tracking-[3px] block mb-2">{t.hero.faqHeader}</span>
+              {t.hero.faqHeader && (
+                <span className="font-mono text-xs font-bold text-orange-400 uppercase tracking-[3px] block mb-2">{t.hero.faqHeader}</span>
+              )}
               <h2 className="font-serif text-3xl sm:text-4xl font-black uppercase text-white tracking-tight">{t.hero.faqTitle}</h2>
               <div className="h-1 w-16 bg-orange-500 mx-auto mt-3" />
               <p className="text-xs font-mono text-[#aaa] mt-4 uppercase tracking-wider">{t.hero.faqSub}</p>
