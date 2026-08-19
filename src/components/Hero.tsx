@@ -147,14 +147,15 @@ END:VCARD`
         // the page's own dark background, which already matches the image. On desktop the plain
         // contain fit left a bit too much empty margin, so it's scaled to taste on desktop while
         // mobile (which looked right at plain contain) is untouched.
-        className="absolute inset-x-0 top-0 h-screen z-0 bg-contain lg:bg-[length:83%] bg-no-repeat bg-scroll lg:bg-fixed pointer-events-none transition-all duration-300"
+        // Position is class-based (not inline) so desktop can be nudged up independently of
+        // mobile, which already sat correctly at plain top alignment.
+        className="absolute inset-x-0 top-0 h-screen z-0 bg-contain lg:bg-[length:83%] bg-no-repeat bg-scroll lg:bg-fixed bg-top lg:[background-position:center_-60px] pointer-events-none transition-all duration-300"
         style={{
           // Lighter than the previous overlay (was up to 0.98 near the bottom) so the truck/
           // plane/ship illustration in the lower half of this image stays visible — text there
           // sits in its own opaque/semi-opaque boxes (cards, buttons) rather than directly on
           // the gradient, so contrast doesn't depend on this overlay being dark.
           backgroundImage: `linear-gradient(to bottom, rgba(8, 9, 11, 0.30) 0%, rgba(8, 9, 11, 0.40) 25%, rgba(8, 9, 11, 0.55) 55%, rgba(8, 9, 11, 0.65) 100%), url('${import.meta.env.BASE_URL}images/hero-bg-neon.jpg')`,
-          backgroundPosition: 'center top',
         }}
       />
       
