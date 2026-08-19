@@ -617,17 +617,23 @@ END:VCARD`
                         {t3('СВ', 'SV', 'ՍՎ')}
                       </div>
                       <div>
-                        <span className="text-[9px] font-mono text-amber-400 uppercase tracking-widest font-extrabold block">{t.hero.salesRole}</span>
+                        {t.hero.salesRole && (
+                          <span className="text-[9px] font-mono text-amber-400 uppercase tracking-widest font-extrabold block">{t.hero.salesRole}</span>
+                        )}
                         <h3 className="font-serif text-2xl font-bold uppercase text-white mt-0.5">{t.hero.salesName}</h3>
-                        <p className="text-[11px] text-[#aaa] font-mono">{t.hero.salesDesc}</p>
+                        {t.hero.salesDesc && (
+                          <p className="text-[11px] text-[#aaa] font-mono">{t.hero.salesDesc}</p>
+                        )}
                       </div>
                     </div>
 
                     <div className="space-y-4">
                       <div className="space-y-1">
-                        <p className="text-[9px] font-mono text-[#777] uppercase tracking-wider font-bold">{t.hero.salesPhoneLabel}</p>
-                        <a 
-                          href="tel:+37499902007" 
+                        {t.hero.salesPhoneLabel && (
+                          <p className="text-[9px] font-mono text-[#777] uppercase tracking-wider font-bold">{t.hero.salesPhoneLabel}</p>
+                        )}
+                        <a
+                          href="tel:+37499902007"
                           className="flex items-center space-x-2 text-xl font-mono font-extrabold text-white hover:text-orange-400 transition"
                         >
                           <Phone className="h-5 w-5 text-orange-500 shrink-0" />
@@ -636,7 +642,9 @@ END:VCARD`
                       </div>
 
                       <div className="space-y-2">
-                        <p className="text-[9px] font-mono text-[#777] uppercase tracking-wider font-bold">{t.hero.messengersLabel}</p>
+                        {t.hero.messengersLabel && (
+                          <p className="text-[9px] font-mono text-[#777] uppercase tracking-wider font-bold">{t.hero.messengersLabel}</p>
+                        )}
                         <div className="flex flex-wrap gap-2 pt-1">
                           <a 
                             href="https://t.me/+37499902007" 
