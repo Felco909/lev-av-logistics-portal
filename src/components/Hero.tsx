@@ -158,8 +158,8 @@ END:VCARD`
           // the dim upper area so the image reads evenly instead of having a visible seam. Text
           // sits in its own opaque/semi-opaque boxes (cards, buttons) rather than directly on the
           // gradient, so contrast doesn't depend on this overlay being dark.
-          backgroundImage: `linear-gradient(to bottom, rgba(8, 9, 11, 0.20) 0%, rgba(8, 9, 11, 0.25) 40%, rgba(8, 9, 11, 0.30) 70%, rgba(8, 9, 11, 0.35) 100%), url('${import.meta.env.BASE_URL}images/hero-bg-neon.jpg')`,
-          filter: 'brightness(1.35) saturate(1.2) contrast(0.95)',
+          backgroundImage: `linear-gradient(to bottom, rgba(8, 9, 11, 0.14) 0%, rgba(8, 9, 11, 0.18) 40%, rgba(8, 9, 11, 0.22) 70%, rgba(8, 9, 11, 0.26) 100%), url('${import.meta.env.BASE_URL}images/hero-bg-neon.jpg')`,
+          filter: 'brightness(1.6) saturate(1.25) contrast(0.92)',
         }}
       />
       
