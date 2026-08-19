@@ -534,9 +534,9 @@ END:VCARD`
                 )}
               </div>
 
-              {/* Three B2B Contact Cards */}
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-                
+              {/* Four B2B Contact Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+
                 {/* 1: CEO / Avetik (Руководитель) */}
                 <div className="bg-[#111318] border-2 border-orange-500 p-6 sm:p-8 flex flex-col justify-between relative shadow-2xl">
                   <div className="space-y-5">
@@ -594,14 +594,23 @@ END:VCARD`
                             <Send className="h-3.5 w-3.5" />
                             <span>Telegram</span>
                           </a>
-                          <a 
-                            href="https://wa.me/37494902007" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
+                          <a
+                            href="https://wa.me/37494902007"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="inline-flex items-center space-x-1.5 bg-white/5 hover:bg-emerald-500 hover:text-black border border-white/15 text-emerald-400 px-3 py-2 text-xs transition font-mono uppercase font-bold"
                           >
                             <MessageCircle className="h-3.5 w-3.5" />
                             <span>WhatsApp</span>
+                          </a>
+                          <a
+                            href="viber://chat?number=%2B37494902007"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center space-x-1.5 bg-white/5 hover:bg-purple-500 hover:text-black border border-white/15 text-purple-400 px-3 py-2 text-xs transition font-mono uppercase font-bold"
+                          >
+                            <MessageSquare className="h-3.5 w-3.5" />
+                            <span>Viber</span>
                           </a>
                         </div>
                       </div>
@@ -655,14 +664,23 @@ END:VCARD`
                             <Send className="h-3.5 w-3.5" />
                             <span>Telegram</span>
                           </a>
-                          <a 
-                            href="https://wa.me/37499902007" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
+                          <a
+                            href="https://wa.me/37499902007"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="inline-flex items-center space-x-1.5 bg-white/5 hover:bg-emerald-500 hover:text-black border border-white/15 text-emerald-400 px-3 py-2 text-xs transition font-mono uppercase font-bold"
                           >
                             <MessageCircle className="h-3.5 w-3.5" />
                             <span>WhatsApp</span>
+                          </a>
+                          <a
+                            href="viber://chat?number=%2B37499902007"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center space-x-1.5 bg-white/5 hover:bg-purple-500 hover:text-black border border-white/15 text-purple-400 px-3 py-2 text-xs transition font-mono uppercase font-bold"
+                          >
+                            <MessageSquare className="h-3.5 w-3.5" />
+                            <span>Viber</span>
                           </a>
                         </div>
                       </div>
@@ -670,48 +688,187 @@ END:VCARD`
                   </div>
                 </div>
 
-                {/* 3: Administration & Support */}
+                {/* 3: Logistics Department */}
                 <div className="bg-[#111318] border border-white/15 hover:border-orange-500/60 p-6 sm:p-8 flex flex-col justify-between relative shadow-xl transition-colors">
                   <div className="space-y-5 flex-1 flex flex-col justify-between">
                     <div className="space-y-4">
                       <div className="border-b border-white/10 pb-4">
-                        <span className="text-[9px] font-mono text-[#888] uppercase tracking-widest font-extrabold block">{t.hero.adminRole}</span>
-                        <h3 className="font-serif text-xl font-bold uppercase text-white mt-1 leading-snug">{t.hero.adminName}</h3>
-                        <p className="text-[11px] text-[#aaa] font-mono mt-1 leading-snug">
-                          {t.hero.adminDesc}
-                        </p>
+                        {t.hero.logisticsRole && (
+                          <span className="text-[9px] font-mono text-[#888] uppercase tracking-widest font-extrabold block">{t.hero.logisticsRole}</span>
+                        )}
+                        <h3 className="font-serif text-xl font-bold uppercase text-white mt-1 leading-snug">{t.hero.logisticsName}</h3>
+                        {t.hero.logisticsDesc && (
+                          <p className="text-[11px] text-[#aaa] font-mono mt-1 leading-snug">
+                            {t.hero.logisticsDesc}
+                          </p>
+                        )}
                       </div>
 
                       <div className="space-y-3">
                         <div className="space-y-1">
-                          <p className="text-[9px] font-mono text-[#777] uppercase tracking-wider font-bold">{t.hero.adminPhonesLabel}</p>
-                          <div className="space-y-1">
-                            <a 
-                              href="tel:+37455902007" 
-                              className="flex items-center space-x-2 text-sm font-mono font-bold text-white hover:text-orange-400 transition"
+                          {t.hero.logisticsPhoneLabel && (
+                            <p className="text-[9px] font-mono text-[#777] uppercase tracking-wider font-bold">{t.hero.logisticsPhoneLabel}</p>
+                          )}
+                          <a
+                            href="tel:+37455902007"
+                            className="flex items-center space-x-2 text-sm font-mono font-bold text-white hover:text-orange-400 transition"
+                          >
+                            <Phone className="h-4 w-4 text-orange-500 shrink-0" />
+                            <span>+374 55 902007</span>
+                          </a>
+                        </div>
+
+                        <div className="space-y-1">
+                          {t.hero.logisticsEmailLabel && (
+                            <p className="text-[9px] font-mono text-[#777] uppercase tracking-wider font-bold">{t.hero.logisticsEmailLabel}</p>
+                          )}
+                          <div className="space-y-0.5">
+                            <a
+                              href="mailto:levavlogistics@gmail.com"
+                              className="flex items-center space-x-2 text-sm font-mono text-[#ccc] hover:text-orange-400 transition break-all"
                             >
-                              <Phone className="h-4 w-4 text-orange-500 shrink-0" />
-                              <span>+374 55 902007</span>
+                              <Mail className="h-4 w-4 text-orange-500 shrink-0" />
+                              <span>levavlogistics@gmail.com</span>
                             </a>
-                            <a 
-                              href="tel:+37495902007" 
-                              className="flex items-center space-x-2 text-sm font-mono font-bold text-white hover:text-orange-400 transition"
+                            <a
+                              href="mailto:avet_avet83@mail.ru"
+                              className="flex items-center space-x-2 text-sm font-mono text-[#ccc] hover:text-orange-400 transition break-all"
                             >
-                              <Phone className="h-4 w-4 text-orange-500 shrink-0" />
-                              <span>+374 95 902007</span>
+                              <Mail className="h-4 w-4 text-orange-500 shrink-0" />
+                              <span>avet_avet83@mail.ru</span>
                             </a>
                           </div>
                         </div>
 
+                        <div className="space-y-1 pt-1 border-t border-white/10">
+                          {t.hero.logisticsMessengersLabel && (
+                            <p className="text-[9px] font-mono text-[#777] uppercase tracking-wider font-bold">{t.hero.logisticsMessengersLabel}</p>
+                          )}
+                          <div className="flex flex-wrap gap-2 pt-1">
+                            <a
+                              href="https://t.me/+37455902007"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center space-x-1.5 bg-white/5 hover:bg-orange-500 hover:text-black border border-white/15 text-orange-400 px-3 py-2 text-xs transition font-mono uppercase font-bold"
+                            >
+                              <Send className="h-3.5 w-3.5" />
+                              <span>Telegram</span>
+                            </a>
+                            <a
+                              href="https://wa.me/37455902007"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center space-x-1.5 bg-white/5 hover:bg-emerald-500 hover:text-black border border-white/15 text-emerald-400 px-3 py-2 text-xs transition font-mono uppercase font-bold"
+                            >
+                              <MessageCircle className="h-3.5 w-3.5" />
+                              <span>WhatsApp</span>
+                            </a>
+                            <a
+                              href="viber://chat?number=%2B37455902007"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center space-x-1.5 bg-white/5 hover:bg-purple-500 hover:text-black border border-white/15 text-purple-400 px-3 py-2 text-xs transition font-mono uppercase font-bold"
+                            >
+                              <MessageSquare className="h-3.5 w-3.5" />
+                              <span>Viber</span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between text-[10px] text-[#777] font-mono gap-1">
+                      <span>{t.hero.workingHours}</span>
+                      <span className="text-orange-400">{t.hero.timezone}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 4: Documents & General Inquiries (Administration) */}
+                <div className="bg-[#111318] border border-white/15 hover:border-orange-500/60 p-6 sm:p-8 flex flex-col justify-between relative shadow-xl transition-colors">
+                  <div className="space-y-5 flex-1 flex flex-col justify-between">
+                    <div className="space-y-4">
+                      <div className="border-b border-white/10 pb-4">
+                        {t.hero.adminRole && (
+                          <span className="text-[9px] font-mono text-[#888] uppercase tracking-widest font-extrabold block">{t.hero.adminRole}</span>
+                        )}
+                        <h3 className="font-serif text-xl font-bold uppercase text-white mt-1 leading-snug">{t.hero.adminName}</h3>
+                        {t.hero.adminDesc && (
+                          <p className="text-[11px] text-[#aaa] font-mono mt-1 leading-snug">
+                            {t.hero.adminDesc}
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="space-y-3">
                         <div className="space-y-1">
-                          <p className="text-[9px] font-mono text-[#777] uppercase tracking-wider font-bold">{t.hero.adminEmailLabel}</p>
-                          <a 
-                            href="mailto:levavlogistics@gmail.com" 
-                            className="flex items-center space-x-2 text-sm font-mono text-[#ccc] hover:text-orange-400 transition break-all"
+                          {t.hero.adminPhonesLabel && (
+                            <p className="text-[9px] font-mono text-[#777] uppercase tracking-wider font-bold">{t.hero.adminPhonesLabel}</p>
+                          )}
+                          <a
+                            href="tel:+37495902007"
+                            className="flex items-center space-x-2 text-sm font-mono font-bold text-white hover:text-orange-400 transition"
                           >
-                            <Mail className="h-4 w-4 text-orange-500 shrink-0" />
-                            <span>levavlogistics@gmail.com</span>
+                            <Phone className="h-4 w-4 text-orange-500 shrink-0" />
+                            <span>+374 95 902007</span>
                           </a>
+                        </div>
+
+                        <div className="space-y-1">
+                          {t.hero.adminEmailLabel && (
+                            <p className="text-[9px] font-mono text-[#777] uppercase tracking-wider font-bold">{t.hero.adminEmailLabel}</p>
+                          )}
+                          <div className="space-y-0.5">
+                            <a
+                              href="mailto:levavlogistics@gmail.com"
+                              className="flex items-center space-x-2 text-sm font-mono text-[#ccc] hover:text-orange-400 transition break-all"
+                            >
+                              <Mail className="h-4 w-4 text-orange-500 shrink-0" />
+                              <span>levavlogistics@gmail.com</span>
+                            </a>
+                            <a
+                              href="mailto:avet_avet83@mail.ru"
+                              className="flex items-center space-x-2 text-sm font-mono text-[#ccc] hover:text-orange-400 transition break-all"
+                            >
+                              <Mail className="h-4 w-4 text-orange-500 shrink-0" />
+                              <span>avet_avet83@mail.ru</span>
+                            </a>
+                          </div>
+                        </div>
+
+                        <div className="space-y-1 pt-1 border-t border-white/10">
+                          {t.hero.adminMessengersLabel && (
+                            <p className="text-[9px] font-mono text-[#777] uppercase tracking-wider font-bold">{t.hero.adminMessengersLabel}</p>
+                          )}
+                          <div className="flex flex-wrap gap-2 pt-1">
+                            <a
+                              href="https://t.me/+37495902007"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center space-x-1.5 bg-white/5 hover:bg-orange-500 hover:text-black border border-white/15 text-orange-400 px-3 py-2 text-xs transition font-mono uppercase font-bold"
+                            >
+                              <Send className="h-3.5 w-3.5" />
+                              <span>Telegram</span>
+                            </a>
+                            <a
+                              href="https://wa.me/37495902007"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center space-x-1.5 bg-white/5 hover:bg-emerald-500 hover:text-black border border-white/15 text-emerald-400 px-3 py-2 text-xs transition font-mono uppercase font-bold"
+                            >
+                              <MessageCircle className="h-3.5 w-3.5" />
+                              <span>WhatsApp</span>
+                            </a>
+                            <a
+                              href="viber://chat?number=%2B37495902007"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center space-x-1.5 bg-white/5 hover:bg-purple-500 hover:text-black border border-white/15 text-purple-400 px-3 py-2 text-xs transition font-mono uppercase font-bold"
+                            >
+                              <MessageSquare className="h-3.5 w-3.5" />
+                              <span>Viber</span>
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
