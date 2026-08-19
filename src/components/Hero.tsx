@@ -143,7 +143,11 @@ END:VCARD`
         // on mobile Safari, so the parallax effect is desktop-only via Tailwind's responsive variant.
         className="absolute inset-x-0 top-0 h-screen z-0 bg-cover bg-no-repeat bg-scroll lg:bg-fixed pointer-events-none transition-all duration-300"
         style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(8, 9, 11, 0.40) 0%, rgba(8, 9, 11, 0.60) 40%, rgba(8, 9, 11, 0.90) 80%, rgba(8, 9, 11, 0.98) 100%), url('${import.meta.env.BASE_URL}images/hero-bg.png')`,
+          // Lighter than the previous overlay (was up to 0.98 near the bottom) so the truck/
+          // plane/ship illustration in the lower half of this image stays visible — text there
+          // sits in its own opaque/semi-opaque boxes (cards, buttons) rather than directly on
+          // the gradient, so contrast doesn't depend on this overlay being dark.
+          backgroundImage: `linear-gradient(to bottom, rgba(8, 9, 11, 0.30) 0%, rgba(8, 9, 11, 0.40) 25%, rgba(8, 9, 11, 0.55) 55%, rgba(8, 9, 11, 0.65) 100%), url('${import.meta.env.BASE_URL}images/hero-bg-neon.jpg')`,
           backgroundPosition: 'center top',
         }}
       />
