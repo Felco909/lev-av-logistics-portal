@@ -505,7 +505,7 @@ END:VCARD`
                     </button>
 
                     {isOpen && (
-                      <div className="px-6 py-4 text-xs sm:text-sm text-[#ccc] font-light leading-relaxed bg-black/40 border-t border-white/10">
+                      <div className="px-6 py-4 text-xs sm:text-sm text-[#ccc] font-light leading-relaxed bg-black/40 border-t border-white/10 whitespace-pre-line">
                         {item.answer}
                       </div>
                     )}
