@@ -172,11 +172,11 @@ END:VCARD`
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-12 items-center">
-            
+          <div>
+
             {/* Left Industrial Text Presentation */}
-            <div className="lg:col-span-7 space-y-6">
-              
+            <div className="max-w-3xl space-y-6">
+
               {/* Industrial System Badge */}
               <div className="inline-flex items-center space-x-2 bg-[#111318] border border-orange-500/40 px-3.5 py-1.5 text-xs font-mono font-bold text-orange-400 shadow-lg">
                 <span className="h-2 w-2 bg-orange-500 animate-pulse rounded-none" />
@@ -264,77 +264,78 @@ END:VCARD`
                 </button>
               </div>
             </div>
+          </div>
 
-            {/* Right Side: Heavy Industrial Metrics & Stats */}
-            <div className="lg:col-span-5 mt-10 lg:mt-0 flex flex-col justify-center">
-              <div className="border border-white/15 bg-[#0e1015] p-5 relative">
-                {/* Decorative Industrial Top Bar */}
-                <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
-                  <div className="flex items-center space-x-2">
-                    <div className="h-3 w-3 bg-orange-500" />
-                    <span className="font-mono text-xs uppercase font-extrabold tracking-widest text-white">
-                      OPERATIONAL TELEMETRY
-                    </span>
-                  </div>
-                  <span className="font-mono text-[10px] text-orange-400 font-bold bg-orange-500/10 px-2 py-0.5 border border-orange-500/30">
-                    LIVE • 24/7
+          {/* Operational Telemetry Panel — kept out of the top row so it doesn't sit over the
+              background artwork; now a full-width strip between the hero copy and Advantages. */}
+          <div className="mt-12 lg:mt-16">
+            <div className="border border-white/15 bg-[#0e1015] p-5 relative">
+              {/* Decorative Industrial Top Bar */}
+              <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+                <div className="flex items-center space-x-2">
+                  <div className="h-3 w-3 bg-orange-500" />
+                  <span className="font-mono text-xs uppercase font-extrabold tracking-widest text-white">
+                    OPERATIONAL TELEMETRY
                   </span>
                 </div>
+                <span className="font-mono text-[10px] text-orange-400 font-bold bg-orange-500/10 px-2 py-0.5 border border-orange-500/30">
+                  LIVE • 24/7
+                </span>
+              </div>
 
-                {/* Quick Stats Grid */}
-                <motion.div 
-                  variants={containerVariants}
-                  initial="hidden"
-                  animate="show"
-                  className="grid grid-cols-2 gap-3"
-                  id="hero-stats-grid"
-                >
-                  {/* Stat 1 */}
-                  <motion.div variants={itemVariants} className="bg-[#14171e] p-4 border border-white/10 hover:border-orange-500/50 transition-colors">
-                    <div className="flex items-center justify-between text-orange-400 mb-2">
-                      <Globe2 className="h-5 w-5" />
-                      <span className="font-mono text-[9px] text-[#666] font-bold">[01]</span>
-                    </div>
-                    <div className="text-2xl sm:text-3xl font-serif font-black text-white tracking-tight">{t.hero.stats.stat1Num}</div>
-                    <div className="text-[10px] font-mono font-bold text-[#aaa] mt-1 uppercase tracking-wider">{t.hero.stats.stat1Label}</div>
-                  </motion.div>
-
-                  {/* Stat 2 */}
-                  <motion.div variants={itemVariants} className="bg-[#14171e] p-4 border border-white/10 hover:border-orange-500/50 transition-colors">
-                    <div className="flex items-center justify-between text-amber-400 mb-2">
-                      <Clock className="h-5 w-5" />
-                      <span className="font-mono text-[9px] text-[#666] font-bold">[02]</span>
-                    </div>
-                    <div className="text-2xl sm:text-3xl font-serif font-black text-white tracking-tight">{t.hero.stats.stat2Num}</div>
-                    <div className="text-[10px] font-mono font-bold text-[#aaa] mt-1 uppercase tracking-wider">{t.hero.stats.stat2Label}</div>
-                  </motion.div>
-
-                  {/* Stat 3 */}
-                  <motion.div variants={itemVariants} className="bg-[#14171e] p-4 border border-white/10 hover:border-orange-500/50 transition-colors">
-                    <div className="flex items-center justify-between text-orange-400 mb-2">
-                      <Shield className="h-5 w-5" />
-                      <span className="font-mono text-[9px] text-[#666] font-bold">[03]</span>
-                    </div>
-                    <div className="text-2xl sm:text-3xl font-serif font-black text-white tracking-tight">{t.hero.stats.stat3Num}</div>
-                    <div className="text-[10px] font-mono font-bold text-[#aaa] mt-1 uppercase tracking-wider">{t.hero.stats.stat3Label}</div>
-                  </motion.div>
-
-                  {/* Stat 4 */}
-                  <motion.div variants={itemVariants} className="bg-[#14171e] p-4 border border-white/10 hover:border-orange-500/50 transition-colors">
-                    <div className="flex items-center justify-between text-amber-400 mb-2">
-                      <Truck className="h-5 w-5" />
-                      <span className="font-mono text-[9px] text-[#666] font-bold">[04]</span>
-                    </div>
-                    <div className="text-2xl sm:text-3xl font-serif font-black text-white tracking-tight">{t.hero.stats.stat4Num}</div>
-                    <div className="text-[10px] font-mono font-bold text-[#aaa] mt-1 uppercase tracking-wider">{t.hero.stats.stat4Label}</div>
-                  </motion.div>
+              {/* Quick Stats Grid */}
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="show"
+                className="grid grid-cols-2 sm:grid-cols-4 gap-3"
+                id="hero-stats-grid"
+              >
+                {/* Stat 1 */}
+                <motion.div variants={itemVariants} className="bg-[#14171e] p-4 border border-white/10 hover:border-orange-500/50 transition-colors">
+                  <div className="flex items-center justify-between text-orange-400 mb-2">
+                    <Globe2 className="h-5 w-5" />
+                    <span className="font-mono text-[9px] text-[#666] font-bold">[01]</span>
+                  </div>
+                  <div className="text-2xl sm:text-3xl font-serif font-black text-white tracking-tight">{t.hero.stats.stat1Num}</div>
+                  <div className="text-[10px] font-mono font-bold text-[#aaa] mt-1 uppercase tracking-wider">{t.hero.stats.stat1Label}</div>
                 </motion.div>
 
-                {/* Industrial bottom spec strip */}
-                <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-[#777]">
-                  <span>CARRIER CODE: #LEV-2010</span>
-                  <span className="text-orange-400 font-bold">CMR / TIR / T1 READY</span>
-                </div>
+                {/* Stat 2 */}
+                <motion.div variants={itemVariants} className="bg-[#14171e] p-4 border border-white/10 hover:border-orange-500/50 transition-colors">
+                  <div className="flex items-center justify-between text-amber-400 mb-2">
+                    <Clock className="h-5 w-5" />
+                    <span className="font-mono text-[9px] text-[#666] font-bold">[02]</span>
+                  </div>
+                  <div className="text-2xl sm:text-3xl font-serif font-black text-white tracking-tight">{t.hero.stats.stat2Num}</div>
+                  <div className="text-[10px] font-mono font-bold text-[#aaa] mt-1 uppercase tracking-wider">{t.hero.stats.stat2Label}</div>
+                </motion.div>
+
+                {/* Stat 3 */}
+                <motion.div variants={itemVariants} className="bg-[#14171e] p-4 border border-white/10 hover:border-orange-500/50 transition-colors">
+                  <div className="flex items-center justify-between text-orange-400 mb-2">
+                    <Shield className="h-5 w-5" />
+                    <span className="font-mono text-[9px] text-[#666] font-bold">[03]</span>
+                  </div>
+                  <div className="text-2xl sm:text-3xl font-serif font-black text-white tracking-tight">{t.hero.stats.stat3Num}</div>
+                  <div className="text-[10px] font-mono font-bold text-[#aaa] mt-1 uppercase tracking-wider">{t.hero.stats.stat3Label}</div>
+                </motion.div>
+
+                {/* Stat 4 */}
+                <motion.div variants={itemVariants} className="bg-[#14171e] p-4 border border-white/10 hover:border-orange-500/50 transition-colors">
+                  <div className="flex items-center justify-between text-amber-400 mb-2">
+                    <Truck className="h-5 w-5" />
+                    <span className="font-mono text-[9px] text-[#666] font-bold">[04]</span>
+                  </div>
+                  <div className="text-2xl sm:text-3xl font-serif font-black text-white tracking-tight">{t.hero.stats.stat4Num}</div>
+                  <div className="text-[10px] font-mono font-bold text-[#aaa] mt-1 uppercase tracking-wider">{t.hero.stats.stat4Label}</div>
+                </motion.div>
+              </motion.div>
+
+              {/* Industrial bottom spec strip */}
+              <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-[#777]">
+                <span>CARRIER CODE: #LEV-2010</span>
+                <span className="text-orange-400 font-bold">CMR / TIR / T1 READY</span>
               </div>
             </div>
           </div>
