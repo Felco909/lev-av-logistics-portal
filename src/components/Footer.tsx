@@ -226,9 +226,30 @@ G-mail:                   levavlogistics@gmail.com
               </div>
 
               <div>
+                <span className="text-[9px] font-mono text-[#666] uppercase block font-bold">{t.footer.logisticsLabel}</span>
+                <a href="tel:+37455902007" className="text-white hover:text-orange-400 transition font-mono font-bold text-sm">
+                  +374 55 902007
+                </a>
+              </div>
+
+              <div>
+                <span className="text-[9px] font-mono text-[#666] uppercase block font-bold">{t.footer.adminLabel}</span>
+                <a href="tel:+37495902007" className="text-white hover:text-orange-400 transition font-mono font-bold text-sm">
+                  +374 95 902007
+                </a>
+              </div>
+
+              <div>
                 <span className="text-[9px] font-mono text-[#666] uppercase block font-bold">E-mail</span>
                 <a href="mailto:levavlogistics@gmail.com" className="text-[#ccc] hover:text-orange-400 transition font-mono text-xs block">
                   levavlogistics@gmail.com
+                </a>
+              </div>
+
+              <div>
+                <span className="text-[9px] font-mono text-[#666] uppercase block font-bold">{t.footer.secondaryEmailLabel}</span>
+                <a href="mailto:avet_avet83@mail.ru" className="text-[#ccc] hover:text-orange-400 transition font-mono text-xs block">
+                  avet_avet83@mail.ru
                 </a>
               </div>
 
