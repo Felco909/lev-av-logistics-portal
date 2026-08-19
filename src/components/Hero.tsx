@@ -136,12 +136,16 @@ END:VCARD`
       {/* Hero Background Image Layer (Positioned to show upper landscape, church & truck) */}
       <div
         // Capped at one viewport tall (not inset-0 / the full multi-section hero height) so
-        // `background-size: cover` scales against a sane box — left uncapped, the element
-        // stretched to the whole hero block (thousands of px on mobile, everything through the
+        // `background-size` scales against a sane box — left uncapped, the element stretched
+        // to the whole hero block (thousands of px on mobile, everything through the
         // advantages/services/FAQ/contacts sections it contains), forcing an extreme zoom that
         // rendered as a blank color instead of the photo. `fixed` attachment is also unreliable
         // on mobile Safari, so the parallax effect is desktop-only via Tailwind's responsive variant.
-        className="absolute inset-x-0 top-0 h-screen z-0 bg-cover bg-no-repeat bg-scroll lg:bg-fixed pointer-events-none transition-all duration-300"
+        // `bg-contain` (not `bg-cover`) keeps the whole illustration in frame — with `cover` on
+        // wide screens the image was scaled up and vertically cropped, cutting off the bottom of
+        // the truck/ship row and making it read as too zoomed in. Any letterboxed edge just shows
+        // the page's own dark background, which already matches the image.
+        className="absolute inset-x-0 top-0 h-screen z-0 bg-contain bg-no-repeat bg-scroll lg:bg-fixed pointer-events-none transition-all duration-300"
         style={{
           // Lighter than the previous overlay (was up to 0.98 near the bottom) so the truck/
           // plane/ship illustration in the lower half of this image stays visible — text there
