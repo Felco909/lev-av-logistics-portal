@@ -144,8 +144,10 @@ END:VCARD`
         // `bg-contain` (not `bg-cover`) keeps the whole illustration in frame — with `cover` on
         // wide screens the image was scaled up and vertically cropped, cutting off the bottom of
         // the truck/ship row and making it read as too zoomed in. Any letterboxed edge just shows
-        // the page's own dark background, which already matches the image.
-        className="absolute inset-x-0 top-0 h-screen z-0 bg-contain bg-no-repeat bg-scroll lg:bg-fixed pointer-events-none transition-all duration-300"
+        // the page's own dark background, which already matches the image. On desktop the plain
+        // contain fit left a bit too much empty margin, so it's scaled up slightly there while
+        // mobile (which looked right at plain contain) is untouched.
+        className="absolute inset-x-0 top-0 h-screen z-0 bg-contain lg:bg-[length:118%] bg-no-repeat bg-scroll lg:bg-fixed pointer-events-none transition-all duration-300"
         style={{
           // Lighter than the previous overlay (was up to 0.98 near the bottom) so the truck/
           // plane/ship illustration in the lower half of this image stays visible — text there
