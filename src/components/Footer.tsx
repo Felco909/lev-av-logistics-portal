@@ -1,5 +1,5 @@
 import React from 'react';
-import { Download, Flame, ShieldCheck } from 'lucide-react';
+import { Download, Facebook, Instagram, Flame, ShieldCheck } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function Footer() {
@@ -166,6 +166,27 @@ G-mail:                   levavlogistics@gmail.com
                   'ՀՀ, 0046, ք. Երևան, Ս. Տարոնցու փող. 3/1, բն. 18'
                 )}
               </div>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <a
+                href="https://www.facebook.com/share/1EQXaY1RSt/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="h-9 w-9 flex items-center justify-center bg-[#111318] border border-white/10 text-[#888] hover:text-orange-400 hover:border-orange-500/50 transition"
+              >
+                <Facebook className="h-4 w-4" />
+              </a>
+              <a
+                href="https://www.instagram.com/levandavtrucks"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="h-9 w-9 flex items-center justify-center bg-[#111318] border border-white/10 text-[#888] hover:text-orange-400 hover:border-orange-500/50 transition"
+              >
+                <Instagram className="h-4 w-4" />
+              </a>
             </div>
           </div>
 
