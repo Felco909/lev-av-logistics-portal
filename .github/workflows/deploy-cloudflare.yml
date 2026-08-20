@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
       - run: npm ci
       - run: npm run build:cloudflare
@@ -24,4 +24,9 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ffbe1b5a9458be8f77afcd5a769b7275
+          # Match the wrangler version pinned in package.json's devDependencies —
+          # wrangler-action defaults to its own bundled version (3.90.0 was seen
+          # in a failed run) which is old enough that it may not fully support
+          # the "assets" (Workers Static Assets) config shape this project uses.
+          wranglerVersion: "4.124.0"
           command: deploy
