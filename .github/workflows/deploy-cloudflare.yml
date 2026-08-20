@@ -20,13 +20,15 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build:cloudflare
-      - uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ffbe1b5a9458be8f77afcd5a769b7275
-          # Match the wrangler version pinned in package.json's devDependencies —
-          # wrangler-action defaults to its own bundled version (3.90.0 was seen
-          # in a failed run) which is old enough that it may not fully support
-          # the "assets" (Workers Static Assets) config shape this project uses.
-          wranglerVersion: "4.124.0"
-          command: deploy
+      # Calling wrangler directly (same command used successfully from a local
+      # machine throughout this project) instead of cloudflare/wrangler-action@v3.
+      # The action's output is grouped into folded log sections that were
+      # repeatedly impossible to fully read back from the GitHub UI while
+      # diagnosing earlier failures — a plain `run:` step prints wrangler's own
+      # output straight into the step log with nothing hidden. Pinning the
+      # exact wrangler version here too (npx wrangler@4.124.0), matching
+      # package.json's devDependency, removes any doubt about which version runs.
+      - run: npx wrangler@4.124.0 deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ffbe1b5a9458be8f77afcd5a769b7275
