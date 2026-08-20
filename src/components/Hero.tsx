@@ -60,6 +60,10 @@ export default function Hero({ onContactClick }: HeroProps) {
   };
 
   const handleDownloadCard = () => {
+    // Derived from the page's own origin (not hardcoded) so this stays correct on
+    // every deployment target — GitHub Pages, Cloudflare Pages, or any future custom
+    // domain — without ever needing another manual fix here again.
+    const siteUrl = window.location.origin + import.meta.env.BASE_URL;
     const vCardData = t3(
       `BEGIN:VCARD
 VERSION:3.0
@@ -72,7 +76,7 @@ TEL;TYPE=WORK,VOICE:+37499902007
 EMAIL:levavlogistics@gmail.com
 EMAIL:avet_avet83@mail.ru
 ADR;TYPE=WORK:;кв. 18;ул. С. Таронци 3/1;Ереван;;0046;Армения
-URL:https://felco909.github.io/lev-av-logistics-portal/
+URL:${siteUrl}
 NOTE:Международные грузоперевозки собственным автопарком по СНГ, Европе и Китаю с 2010 года.
 END:VCARD`,
       `BEGIN:VCARD
@@ -86,7 +90,7 @@ TEL;TYPE=WORK,VOICE:+37499902007
 EMAIL:levavlogistics@gmail.com
 EMAIL:avet_avet83@mail.ru
 ADR;TYPE=WORK:;Apt. 18;S. Tarontsi St. 3/1;Yerevan;;0046;Armenia
-URL:https://felco909.github.io/lev-av-logistics-portal/
+URL:${siteUrl}
 NOTE:International freight forwarding with our own fleet across the CIS, Europe and China since 2010.
 END:VCARD`,
       `BEGIN:VCARD
@@ -100,7 +104,7 @@ TEL;TYPE=WORK,VOICE:+37499902007
 EMAIL:levavlogistics@gmail.com
 EMAIL:avet_avet83@mail.ru
 ADR;TYPE=WORK:;բն. 18;Ս. Տարոնցու փող. 3/1;Երևան;;0046;Հայաստան
-URL:https://felco909.github.io/lev-av-logistics-portal/
+URL:${siteUrl}
 NOTE:Միջազգային բեռնափոխադրումներ սեփական ավտոպարկով ԱՊՀ, Եվրոպա և Չինաստան ուղղություններով 2010 թվականից։
 END:VCARD`
     );
