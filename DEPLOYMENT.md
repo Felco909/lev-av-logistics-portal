@@ -44,11 +44,16 @@ npm run build:cloudflare
 
 ## Автодеплой (GitHub Actions)
 
-При каждом `git push` в `master` запускаются **два независимых** workflow:
+При каждом `git push` в `master` запускаются **два независимых** workflow, оба стабильно работают:
 
-1. **`.github/workflows/deploy.yml`** → GitHub Pages. Стабильно работает.
-2. **`.github/workflows/deploy-cloudflare.yml`** → Cloudflare Workers, через `cloudflare/wrangler-action`. Требует секрет репозитория `CLOUDFLARE_API_TOKEN` (Settings → Secrets and variables → Actions).
-   **Статус на данный момент: настроен, но падает на шаге аутентификации** — расследование причины не завершено (см. историю коммитов/чат с ассистентом). До исправления автодеплой на Cloudflare нужно делать вручную командой `npm run deploy:cloudflare` после каждого пуша.
+1. **`.github/workflows/deploy.yml`** → GitHub Pages.
+2. **`.github/workflows/deploy-cloudflare.yml`** → Cloudflare Workers, напрямую через `npx wrangler@4.124.0 deploy` (без обёртки `cloudflare/wrangler-action` — от неё отказались, т.к. её вывод в логах GitHub сворачивался в группы, из-за которых было невозможно прочитать реальную ошибку через веб-интерфейс). Требует секрет репозитория `CLOUDFLARE_API_TOKEN`.
+
+   **Важно про секрет**: он должен быть добавлен именно в
+   `Settings → Secrets and variables → Actions → Repository secrets`.
+   В этом репозитории уже существует отдельное GitHub Environment `github-pages` (создалось автоматически при первой настройке GitHub Pages) — если добавить секрет туда (страница `Settings → Environments`), workflow для Cloudflare его не увидит, т.к. не объявляет `environment: github-pages`. Именно это было причиной 6 подряд неудачных прогонов при первой настройке — секрет лежал не в том месте.
+
+   Ручной деплой (`npm run deploy:cloudflare`) остаётся рабочим способом на случай, если автодеплой понадобится продублировать вручную.
 
 ## Конфигурация Cloudflare Workers
 
