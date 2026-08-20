@@ -63,49 +63,52 @@ export default function Hero({ onContactClick }: HeroProps) {
     const vCardData = t3(
       `BEGIN:VCARD
 VERSION:3.0
-N:Avetisyan;Avetik;;;
-FN:Avetik Avetisyan (LEV&AV LLC)
+N:Зограбян;Аветик;;;
+FN:Аветик Зограбян (LEV&AV LLC)
 ORG:ООО «ЛЕВ ЭНД АВ» (LEV&AV LLC);
 TITLE:Генеральный директор / CEO
 TEL;TYPE=CELL,VOICE:+37494902007
 TEL;TYPE=WORK,VOICE:+37499902007
 EMAIL:levavlogistics@gmail.com
 EMAIL:avet_avet83@mail.ru
-ADR;TYPE=WORK:;;ул. Давид Бека 134/4;Ереван;;0087;Армения
-URL:https://levav.am
+ADR;TYPE=WORK:;кв. 18;ул. С. Таронци 3/1;Ереван;;0046;Армения
+URL:https://felco909.github.io/lev-av-logistics-portal/
 NOTE:Международные грузоперевозки собственным автопарком по СНГ, Европе и Китаю с 2010 года.
 END:VCARD`,
       `BEGIN:VCARD
 VERSION:3.0
-N:Avetisyan;Avetik;;;
-FN:Avetik Avetisyan (LEV&AV LLC)
+N:Zohrabyan;Avetik;;;
+FN:Avetik Zohrabyan (LEV&AV LLC)
 ORG:LEV&AV LLC (ООО «ЛЕВ ЭНД АВ»);
 TITLE:CEO / General Director
 TEL;TYPE=CELL,VOICE:+37494902007
 TEL;TYPE=WORK,VOICE:+37499902007
 EMAIL:levavlogistics@gmail.com
 EMAIL:avet_avet83@mail.ru
-ADR;TYPE=WORK:;;134/4 David Bek St.;Yerevan;;0087;Armenia
-URL:https://levav.am
+ADR;TYPE=WORK:;Apt. 18;S. Tarontsi St. 3/1;Yerevan;;0046;Armenia
+URL:https://felco909.github.io/lev-av-logistics-portal/
 NOTE:International freight forwarding with our own fleet across the CIS, Europe and China since 2010.
 END:VCARD`,
       `BEGIN:VCARD
 VERSION:3.0
-N:Avetisyan;Avetik;;;
-FN:Avetik Avetisyan (LEV&AV LLC)
+N:Զոհրաբյան;Ավետիք;;;
+FN:Ավետիք Զոհրաբյան (LEV&AV LLC)
 ORG:«ԼԵՎ ԸՆԴ ԱՎ» ՍՊԸ (LEV&AV LLC);
 TITLE:Գլխավոր տնօրեն / CEO
 TEL;TYPE=CELL,VOICE:+37494902007
 TEL;TYPE=WORK,VOICE:+37499902007
 EMAIL:levavlogistics@gmail.com
 EMAIL:avet_avet83@mail.ru
-ADR;TYPE=WORK:;;Դավիթ Բեկի փող. 134/4;Երևան;;0087;Հայաստան
-URL:https://levav.am
+ADR;TYPE=WORK:;բն. 18;Ս. Տարոնցու փող. 3/1;Երևան;;0046;Հայաստան
+URL:https://felco909.github.io/lev-av-logistics-portal/
 NOTE:Միջազգային բեռնափոխադրումներ սեփական ավտոպարկով ԱՊՀ, Եվրոպա և Չինաստան ուղղություններով 2010 թվականից։
 END:VCARD`
     );
 
-    const blob = new Blob([vCardData], { type: 'text/vcard;charset=utf-8' });
+    // vCard/RFC 6350 requires CRLF line breaks — template literals only produce
+    // LF, which some contact-app parsers (notably several Android/desktop
+    // importers) silently reject or render as an empty/unreadable card.
+    const blob = new Blob([vCardData.replace(/\n/g, '\r\n')], { type: 'text/vcard;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
