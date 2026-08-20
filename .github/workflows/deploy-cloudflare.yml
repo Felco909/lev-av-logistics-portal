@@ -19,9 +19,7 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npm run build
-        env:
-          DEPLOY_TARGET: cloudflare
+      - run: npm run build:cloudflare
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
