@@ -34,15 +34,18 @@
 body {
   background-color: #08090b;
   color: #e5e7eb;
-  background-image: 
+  /* This used to also layer in a hero photo (url(...)) directly on <body> — it
+     loaded as soon as the stylesheet parsed, before React mounted and painted
+     the Hero section's own (different, dynamically-sized) background over it,
+     so the old photo flashed briefly on every page load. The Hero component
+     now fully owns its own background image; body only needs the ambient
+     texture/vignette that shows through elsewhere on the page. */
+  background-image:
     radial-gradient(rgba(206, 99, 38, 0.035) 1px, transparent 0),
-    linear-gradient(to bottom, rgba(8, 9, 11, 0.45), rgba(8, 9, 11, 0.75)),
-    url('/images/hero-bg.png');
-  background-size: 28px 28px, 100% 100%, cover;
-  background-position: 0 0, center center, center top;
-  background-repeat: repeat, no-repeat, no-repeat;
-  /* `fixed` attachment is unreliable on mobile Safari (image ends up mispositioned
-     or blank), so it's only enabled above the breakpoint where it's actually safe. */
+    linear-gradient(to bottom, rgba(8, 9, 11, 0.45), rgba(8, 9, 11, 0.75));
+  background-size: 28px 28px, 100% 100%;
+  background-position: 0 0, center center;
+  background-repeat: repeat, no-repeat;
   background-attachment: scroll;
   font-family: var(--font-sans);
 }
