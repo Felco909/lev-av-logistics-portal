@@ -111,9 +111,11 @@ export default function Preloader({ onComplete, minDuration = 800 }: PreloaderPr
               transition={{ duration: 0.4 }}
               className="space-y-1 mb-8"
             >
-              <div className="font-serif font-black text-4xl sm:text-5xl tracking-tight text-white uppercase leading-none">
-                LEV<span className="text-orange-500">&</span>AV
-              </div>
+              <img
+                src={`${import.meta.env.BASE_URL}images/logo.png`}
+                alt="LEV&AV Logistics"
+                className="w-64 sm:w-80 h-auto object-contain mx-auto"
+              />
               <div className="flex items-center justify-center space-x-2 pt-2">
                 <span className="h-[2px] w-6 bg-orange-500"></span>
                 <span className="text-[9px] font-mono tracking-[3px] text-orange-400 uppercase font-bold">

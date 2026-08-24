@@ -109,9 +109,9 @@ export default function Navbar({ onContactClick }: NavbarProps) {
             id="nav-logo"
           >
             <img
-              src={`${import.meta.env.BASE_URL}images/logo.jpg`}
+              src={`${import.meta.env.BASE_URL}images/logo.png`}
               alt="LEV&AV Logistics"
-              className="h-11 sm:h-12 w-auto object-contain mix-blend-lighten"
+              className="h-14 sm:h-16 w-auto object-contain"
             />
             <div className="hidden sm:flex flex-col ml-2">
               <div className="h-[2px] bg-gradient-to-r from-orange-500 via-amber-500 to-transparent"></div>
@@ -140,7 +140,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
                   {isActive && (
                     <motion.div
                       layoutId="activeNavIndicator"
-                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-orange-500 shadow-[0_0_6px_rgba(206,99,38,0.4)]"
+                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-orange-500 shadow-[0_0_6px_rgba(224,112,47,0.4)]"
                       transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                     />
                   )}
@@ -250,9 +250,9 @@ export default function Navbar({ onContactClick }: NavbarProps) {
                 <div className="flex items-center justify-between border-b border-white/10 pb-5 mb-6">
                   <div>
                     <img
-                      src={`${import.meta.env.BASE_URL}images/logo.jpg`}
+                      src={`${import.meta.env.BASE_URL}images/logo.png`}
                       alt="LEV&AV Logistics"
-                      className="h-9 w-auto object-contain mix-blend-lighten"
+                      className="h-12 w-auto object-contain"
                     />
                     <span className="text-[8px] font-mono text-orange-400 tracking-widest uppercase block mt-1 font-bold">
                       {t3('[ИНДУСТРИАЛЬНАЯ ЛОГИСТИКА]', '[INDUSTRIAL FREIGHT]', '[ԱՐԴՅՈՒՆԱԲԵՐԱԿԱՆ ԼՈԳԻՍՏԻԿԱ]')}

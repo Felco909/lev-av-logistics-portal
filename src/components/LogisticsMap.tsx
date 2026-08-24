@@ -225,8 +225,8 @@ export default function LogisticsMap({ onSelectRoute, selectedCategory = 'all' }
             >
             <defs>
               <linearGradient id="armeniaGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#df7f3e" stopOpacity="1" />
-                <stop offset="100%" stopColor="#ce6326" stopOpacity="1" />
+                <stop offset="0%" stopColor="#f18c47" stopOpacity="1" />
+                <stop offset="100%" stopColor="#e0702f" stopOpacity="1" />
               </linearGradient>
               <filter id="glowEffect" x="-40%" y="-40%" width="180%" height="180%">
                 <feGaussianBlur stdDeviation="3" result="blur" />

@@ -10,20 +10,20 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "Noto Sans Armenian", monospace;
   
   /* Subdued Industrial Muted Orange & Amber */
-  --color-orange-300: #e8a572;
-  --color-orange-400: #df7f3e;
-  --color-orange-500: #ce6326; /* Calmer, elegant matte industrial orange */
-  --color-orange-600: #ad4e19;
-  --color-orange-700: #8c3b10;
+  --color-orange-300: #fab27b;
+  --color-orange-400: #f18c47;
+  --color-orange-500: #e0702f; /* Calmer, elegant matte industrial orange, brightened slightly */
+  --color-orange-600: #bf5b22;
+  --color-orange-700: #9e4819;
 
   --color-amber-300: #e5b36c;
   --color-amber-400: #d49a46;
   --color-amber-500: #bc8129;
   --color-amber-600: #9d671c;
-  
-  --color-gold: #ce6326;
-  --color-gold-hover: #ad4e19;
-  --color-accent-blue: #ce6326;
+
+  --color-gold: #e0702f;
+  --color-gold-hover: #bf5b22;
+  --color-accent-blue: #e0702f;
   --color-brand-blue: #111318;
   --color-brand-deep: #08090b;
   --color-brand-blue-accent: #bc8129;
@@ -41,7 +41,7 @@ body {
      now fully owns its own background image; body only needs the ambient
      texture/vignette that shows through elsewhere on the page. */
   background-image:
-    radial-gradient(rgba(206, 99, 38, 0.035) 1px, transparent 0),
+    radial-gradient(rgba(224, 112, 47, 0.035) 1px, transparent 0),
     linear-gradient(to bottom, rgba(8, 9, 11, 0.45), rgba(8, 9, 11, 0.75));
   background-size: 28px 28px, 100% 100%;
   background-position: 0 0, center center;
@@ -92,16 +92,16 @@ body {
 .glass-card-hover:hover,
 .industrial-card-hover:hover {
   background-color: rgba(22, 25, 33, 0.96) !important;
-  border-color: rgba(206, 99, 38, 0.45) !important;
-  box-shadow: 0 12px 30px -8px rgba(206, 99, 38, 0.1) !important;
+  border-color: rgba(224, 112, 47, 0.45) !important;
+  box-shadow: 0 12px 30px -8px rgba(224, 112, 47, 0.1) !important;
 }
 
 /* Industrial Hazard diagonal stripes */
 .industrial-hazard-stripe {
   background: repeating-linear-gradient(
     -45deg,
-    #ce6326,
-    #ce6326 10px,
+    #e0702f,
+    #e0702f 10px,
     #08090b 10px,
     #08090b 20px
   );
@@ -164,5 +164,5 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #f97316;
+  background: #e0702f;
 }

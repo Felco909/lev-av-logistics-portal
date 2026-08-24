@@ -43,9 +43,9 @@ export default function Footer() {
           <div className="md:col-span-5 space-y-4">
             <div className="flex flex-col">
               <img
-                src={`${import.meta.env.BASE_URL}images/logo.jpg`}
+                src={`${import.meta.env.BASE_URL}images/logo.png`}
                 alt="LEV&AV Logistics"
-                className="h-14 w-auto object-contain mix-blend-lighten"
+                className="h-20 w-auto object-contain"
               />
               <span className="font-mono text-[9px] tracking-[3px] text-orange-400 uppercase block mt-1 font-bold">
                 HEAVY INDUSTRIAL LOGISTICS • EST. 2010
