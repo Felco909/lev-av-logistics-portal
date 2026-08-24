@@ -108,18 +108,16 @@ export default function Navbar({ onContactClick }: NavbarProps) {
             className="flex cursor-pointer items-center text-white transition hover:opacity-95 group"
             id="nav-logo"
           >
-            <div className="flex flex-col">
-              <span className="font-serif font-black text-2xl sm:text-[26px] tracking-tight text-white uppercase italic leading-none flex items-center">
-                LEV<span className="text-orange-500 not-italic mx-0.5">&</span>AV
-                <span className="text-[10px] font-mono font-normal text-orange-500/80 not-italic ml-1">[LOGISTICS]</span>
+            <img
+              src={`${import.meta.env.BASE_URL}images/logo.jpg`}
+              alt="LEV&AV Logistics"
+              className="h-11 sm:h-12 w-auto object-contain mix-blend-lighten"
+            />
+            <div className="hidden sm:flex flex-col ml-2">
+              <div className="h-[2px] bg-gradient-to-r from-orange-500 via-amber-500 to-transparent"></div>
+              <span className="font-mono text-[7.5px] tracking-[2.8px] sm:tracking-[3px] text-[#bbb] uppercase py-0.5 font-bold">
+                HEAVY FREIGHT & LOGISTICS • EST. 2010
               </span>
-              
-              <div className="flex flex-col mt-0.5">
-                <div className="h-[2px] bg-gradient-to-r from-orange-500 via-amber-500 to-transparent"></div>
-                <span className="font-mono text-[7.5px] tracking-[2.8px] sm:tracking-[3px] text-[#bbb] uppercase py-0.5 font-bold">
-                  HEAVY FREIGHT & LOGISTICS • EST. 2010
-                </span>
-              </div>
             </div>
           </div>
 
@@ -251,9 +249,11 @@ export default function Navbar({ onContactClick }: NavbarProps) {
               <div>
                 <div className="flex items-center justify-between border-b border-white/10 pb-5 mb-6">
                   <div>
-                    <span className="font-serif font-black text-xl tracking-tight text-white uppercase italic leading-none block">
-                      LEV<span className="text-orange-500 not-italic">&</span>AV
-                    </span>
+                    <img
+                      src={`${import.meta.env.BASE_URL}images/logo.jpg`}
+                      alt="LEV&AV Logistics"
+                      className="h-9 w-auto object-contain mix-blend-lighten"
+                    />
                     <span className="text-[8px] font-mono text-orange-400 tracking-widest uppercase block mt-1 font-bold">
                       {t3('[ИНДУСТРИАЛЬНАЯ ЛОГИСТИКА]', '[INDUSTRIAL FREIGHT]', '[ԱՐԴՅՈՒՆԱԲԵՐԱԿԱՆ ԼՈԳԻՍՏԻԿԱ]')}
                     </span>

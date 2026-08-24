@@ -42,9 +42,11 @@ export default function Footer() {
           {/* Column 1: Brand Info */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex flex-col">
-              <span className="font-serif font-black text-2xl sm:text-3xl tracking-tight text-white uppercase leading-none">
-                LEV<span className="text-orange-500">&</span>AV
-              </span>
+              <img
+                src={`${import.meta.env.BASE_URL}images/logo.jpg`}
+                alt="LEV&AV Logistics"
+                className="h-14 w-auto object-contain mix-blend-lighten"
+              />
               <span className="font-mono text-[9px] tracking-[3px] text-orange-400 uppercase block mt-1 font-bold">
                 HEAVY INDUSTRIAL LOGISTICS • EST. 2010
               </span>
