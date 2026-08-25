@@ -45,7 +45,7 @@ export default function Footer() {
               <img
                 src={`${import.meta.env.BASE_URL}images/logo.png`}
                 alt="LEV&AV Logistics"
-                className="h-28 w-auto object-contain"
+                className="h-36 w-auto object-contain"
               />
               <span className="font-mono text-[9px] tracking-[3px] text-orange-400 uppercase block mt-1 font-bold">
                 HEAVY INDUSTRIAL LOGISTICS • EST. 2010
