@@ -100,10 +100,10 @@ export default function Navbar({ onContactClick }: NavbarProps) {
         }`}
         id="main-navbar"
       >
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          
+        <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+
           {/* Bold Industrial Brand Logo */}
-          <div 
+          <div
             onClick={() => scrollTo('hero-section')}
             className="flex cursor-pointer items-center text-white transition hover:opacity-95 group"
             id="nav-logo"
@@ -111,7 +111,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
             <img
               src={`${import.meta.env.BASE_URL}images/logo.png`}
               alt="LEV&AV Logistics"
-              className="h-14 sm:h-16 w-auto object-contain"
+              className="h-20 sm:h-24 w-auto object-contain"
             />
             <div className="hidden sm:flex flex-col ml-2">
               <div className="h-[2px] bg-gradient-to-r from-orange-500 via-amber-500 to-transparent"></div>
