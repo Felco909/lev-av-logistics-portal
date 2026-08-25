@@ -56,8 +56,8 @@ body {
   }
 }
 
-/* Keeps section tops clear of the sticky navbar (~128-136px, header row is
-   h-32 to fit the larger logo) when jumped to via nav links or scrollIntoView. */
+/* Keeps section tops clear of the sticky navbar (~150-158px, header row is
+   9.375rem to fit the larger logo) when jumped to via nav links or scrollIntoView. */
 #hero-section,
 #advantages-section,
 #services-showcase,
@@ -67,7 +67,7 @@ body {
 #fleet,
 #geography,
 #requisites {
-  scroll-margin-top: 156px;
+  scroll-margin-top: 180px;
 }
 
 #hero-section {

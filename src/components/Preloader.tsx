@@ -102,7 +102,7 @@ export default function Preloader({ onComplete, minDuration = 800 }: PreloaderPr
           {/* Subtle background glow */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] bg-orange-600/10 rounded-full blur-[100px] pointer-events-none" />
 
-          <div className="relative z-10 flex flex-col items-center max-w-2xl text-center px-6">
+          <div className="relative z-10 flex flex-col items-center max-w-3xl text-center px-6">
             
             {/* Bold Industrial Typography Brand */}
             <motion.div
@@ -114,7 +114,7 @@ export default function Preloader({ onComplete, minDuration = 800 }: PreloaderPr
               <img
                 src={`${import.meta.env.BASE_URL}images/logo.png`}
                 alt="LEV&AV Logistics"
-                className="w-[28rem] sm:w-[34rem] h-auto object-contain mx-auto"
+                className="w-[33rem] sm:w-[40rem] h-auto object-contain mx-auto"
               />
               <div className="flex items-center justify-center space-x-2 pt-2">
                 <span className="h-[2px] w-6 bg-orange-500"></span>

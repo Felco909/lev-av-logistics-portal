@@ -100,25 +100,19 @@ export default function Navbar({ onContactClick }: NavbarProps) {
         }`}
         id="main-navbar"
       >
-        <div className="mx-auto flex h-32 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex h-[9.375rem] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
 
           {/* Bold Industrial Brand Logo */}
           <div
             onClick={() => scrollTo('hero-section')}
-            className="flex cursor-pointer items-center text-white transition hover:opacity-95 group"
+            className="flex shrink-0 cursor-pointer items-center text-white transition hover:opacity-95 group"
             id="nav-logo"
           >
             <img
               src={`${import.meta.env.BASE_URL}images/logo.png`}
               alt="LEV&AV Logistics"
-              className="h-28 sm:h-32 w-auto object-contain"
+              className="h-[8.25rem] sm:h-[9.375rem] w-auto object-contain"
             />
-            <div className="hidden sm:flex flex-col ml-2">
-              <div className="h-[2px] bg-gradient-to-r from-orange-500 via-amber-500 to-transparent"></div>
-              <span className="font-mono text-[7.5px] tracking-[2.8px] sm:tracking-[3px] text-[#bbb] uppercase py-0.5 font-bold">
-                HEAVY FREIGHT & LOGISTICS • EST. 2010
-              </span>
-            </div>
           </div>
 
           {/* Desktop Navigation Links */}
@@ -252,7 +246,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
                     <img
                       src={`${import.meta.env.BASE_URL}images/logo.png`}
                       alt="LEV&AV Logistics"
-                      className="h-16 w-auto object-contain"
+                      className="h-20 w-auto object-contain"
                     />
                     <span className="text-[8px] font-mono text-orange-400 tracking-widest uppercase block mt-1 font-bold">
                       {t3('[ИНДУСТРИАЛЬНАЯ ЛОГИСТИКА]', '[INDUSTRIAL FREIGHT]', '[ԱՐԴՅՈՒՆԱԲԵՐԱԿԱՆ ԼՈԳԻՍՏԻԿԱ]')}
