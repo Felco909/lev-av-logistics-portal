@@ -100,7 +100,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
         }`}
         id="main-navbar"
       >
-        <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex h-28 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
 
           {/* Bold Industrial Brand Logo */}
           <div
@@ -111,7 +111,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
             <img
               src={`${import.meta.env.BASE_URL}images/logo.png`}
               alt="LEV&AV Logistics"
-              className="h-20 sm:h-24 w-auto object-contain"
+              className="h-24 sm:h-28 w-auto object-contain"
             />
             <div className="hidden sm:flex flex-col ml-2">
               <div className="h-[2px] bg-gradient-to-r from-orange-500 via-amber-500 to-transparent"></div>
@@ -252,7 +252,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
                     <img
                       src={`${import.meta.env.BASE_URL}images/logo.png`}
                       alt="LEV&AV Logistics"
-                      className="h-12 w-auto object-contain"
+                      className="h-14 w-auto object-contain"
                     />
                     <span className="text-[8px] font-mono text-orange-400 tracking-widest uppercase block mt-1 font-bold">
                       {t3('[ИНДУСТРИАЛЬНАЯ ЛОГИСТИКА]', '[INDUSTRIAL FREIGHT]', '[ԱՐԴՅՈՒՆԱԲԵՐԱԿԱՆ ԼՈԳԻՍՏԻԿԱ]')}
