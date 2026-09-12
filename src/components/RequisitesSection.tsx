@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Copy, Check, Download, Landmark, ShieldCheck, FileCheck, Flame, PhoneCall, Building2, CreditCard, FileText } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { downloadCompanyCard, downloadCommercialProposal } from '../utils/documents';
 
 export default function RequisitesSection() {
   const { t, lang } = useLanguage();
@@ -55,117 +56,8 @@ BIK / SWIFT: 044525631
     handleCopy(allRequisites, 'all');
   };
 
-  const handleDownloadCard = () => {
-    const cardText = t3(
-      `========================================================================
-             КАРТОЧКА ПРЕДПРИЯТИЯ / COMPANY PROFILE CARD
-                    ООО «ЛЕВ ЭНД АВ» (LEV&AV LLC)
-========================================================================
-
-1. ЮРИДИЧЕСКИЕ СВЕДЕНИЯ / LEGAL DETAILS:
-------------------------------------------------------------------------
-Полное наименование:      Общество с ограниченной ответственностью «ЛЕВ ЭНД АВ»
-                          (Limited Liability Company «LEV AND AV»)
-Краткое наименование:     ООО «ЛЕВ ЭНД АВ» (LEV&AV LLC)
-ИНН Компании / TIN:       02248043
-Юридический адрес:        РА, 0046 г. Ереван, ул. С. Таронци 3/1. Кв. 18
-                          (RA, 0046 Yerevan, S. Tarontsi St. 3/1, Apt. 18)
-Фактический адрес:        РА, 0046 г. Ереван, ул. С. Таронци 3/1. Кв. 18
-
-2. БАНКОВСКИЕ РЕКВИЗИТЫ / BANK DETAILS:
-------------------------------------------------------------------------
-Расчетный счет:           16600166153658
-Банк:                     ЗАО "ЭВОКАБАНК" (CJSC "EVOCABANK")
-Кор. счет:                30101810300000000765
-БИК / SWIFT:              044525631
-ИНН (Банка):              7718011918
-
-3. РУКОВОДСТВО И КОНТАКТЫ / MANAGEMENT & CONTACTS:
-------------------------------------------------------------------------
-Генеральный директор / CEO: Аветик Зограбян Самвелович (Avetik Zohrabyan)
-Директор (Аветик):        +374 94 902007
-Менеджер по продажам (Саргис): +374 99 902007
-Дополнительные контакты:  +374 55 902007, +374 95 902007
-G-mail:                   levavlogistics@gmail.com
-Доп. E-mail:              avet_avet83@mail.ru
-
-========================================================================`,
-      `========================================================================
-                          COMPANY PROFILE CARD
-                    LEV&AV LLC (ООО «ЛЕВ ЭНД АВ»)
-========================================================================
-
-1. LEGAL DETAILS:
-------------------------------------------------------------------------
-Full legal name:          Limited Liability Company «LEV AND AV»
-                          (ООО «ЛЕВ ЭНД АВ»)
-Short name:               LEV&AV LLC (ООО «ЛЕВ ЭНД АВ»)
-Company TIN:              02248043
-Legal address:            RA, 0046 Yerevan, S. Tarontsi St. 3/1, Apt. 18
-Actual address:           RA, 0046 Yerevan, S. Tarontsi St. 3/1, Apt. 18
-
-2. BANK DETAILS:
-------------------------------------------------------------------------
-Account:                  16600166153658
-Bank:                     CJSC "EVOCABANK"
-Corr. account:            30101810300000000765
-BIC / SWIFT:              044525631
-Bank TIN:                 7718011918
-
-3. MANAGEMENT & CONTACTS:
-------------------------------------------------------------------------
-CEO:                      Avetik Zohrabyan
-Director (Avetik):        +374 94 902007
-Sales Manager (Sargis):   +374 99 902007
-Backup contacts:          +374 55 902007, +374 95 902007
-G-mail:                   levavlogistics@gmail.com
-Additional email:         avet_avet83@mail.ru
-
-========================================================================`,
-      `========================================================================
-                    ԸՆԿԵՐՈՒԹՅԱՆ ՔԱՐՏ / COMPANY PROFILE CARD
-                    «ԼԵՎ ԸՆԴ ԱՎ» ՍՊԸ (LEV&AV LLC)
-========================================================================
-
-1. ԻՐԱՎԱԲԱՆԱԿԱՆ ՏՎՅԱԼՆԵՐ.
-------------------------------------------------------------------------
-Լրիվ անվանում:            Սահմանափակ պատասխանատվությամբ ընկերություն «ԼԵՎ ԸՆԴ ԱՎ»
-                          (Limited Liability Company «LEV AND AV»)
-Կրճատ անվանում:           «ԼԵՎ ԸՆԴ ԱՎ» ՍՊԸ (LEV&AV LLC)
-Ընկերության ՀՎՀՀ / TIN:   02248043
-Իրավաբանական հասցե:       ՀՀ, 0046 ք. Երևան, Ս. Տարոնցու փող. 3/1, բն. 18
-Փաստացի հասցե:            ՀՀ, 0046 ք. Երևան, Ս. Տարոնցու փող. 3/1, բն. 18
-
-2. ԲԱՆԿԱՅԻՆ ՌԵԿՎԻԶԻՏՆԵՐ.
-------------------------------------------------------------------------
-Հաշվարկային հաշիվ:        16600166153658
-Բանկ:                     Էվոկաբանկ ՓԲԸ (CJSC "EVOCABANK")
-Թղթակցային հաշիվ:         30101810300000000765
-ԲԱԴԿ / SWIFT:              044525631
-Բանկի ՀՎՀՀ:                7718011918
-
-3. ՂԵԿԱՎԱՐՈՒԹՅՈՒՆ ԵՎ ԿՈՆՏԱԿՏՆԵՐ.
-------------------------------------------------------------------------
-Գլխավոր տնօրեն / CEO:     Ավետիք Զոհրաբյան Սամվելի (Avetik Zohrabyan)
-Տնօրեն (Ավետիք):          +374 94 902007
-Վաճառքի մենեջեր (Սարգիս): +374 99 902007
-Լրացուցիչ կոնտակտներ:     +374 55 902007, +374 95 902007
-G-mail:                   levavlogistics@gmail.com
-Լրաց. էլ. փոստ:           avet_avet83@mail.ru
-
-========================================================================`
-    );
-
-    const blob = new Blob([cardText], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'Requisites_LEV_AV_LLC.txt';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  };
+  const handleDownloadCard = () => downloadCompanyCard(lang);
+  const handleDownloadProposal = () => downloadCommercialProposal(lang);
 
   return (
     <section id="requisites" className="relative py-20 sm:py-28 border-t border-white/10 overflow-hidden bg-[#08090b]">
@@ -231,13 +123,23 @@ G-mail:                   levavlogistics@gmail.com
               </div>
             </div>
 
-            <button
-              onClick={handleDownloadCard}
-              className="inline-flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 text-black px-5 py-3 text-xs font-mono uppercase tracking-wider font-extrabold transition self-start sm:self-auto cursor-pointer shadow-lg"
-            >
-              <Download className="h-4 w-4" />
-              <span>{t.requisites.downloadBtn}</span>
-            </button>
+            <div className="flex flex-col sm:flex-row gap-3 self-start sm:self-auto">
+              <button
+                onClick={handleDownloadCard}
+                className="inline-flex items-center justify-center space-x-2 bg-orange-500 hover:bg-orange-600 text-black px-5 py-3 text-xs font-mono uppercase tracking-wider font-extrabold transition cursor-pointer shadow-lg"
+              >
+                <Download className="h-4 w-4" />
+                <span>{t.requisites.downloadBtn}</span>
+              </button>
+
+              <button
+                onClick={handleDownloadProposal}
+                className="inline-flex items-center justify-center space-x-2 bg-[#181b22] hover:bg-[#20242e] border border-white/15 hover:border-orange-500 text-white px-5 py-3 text-xs font-mono uppercase tracking-wider font-extrabold transition cursor-pointer shadow-lg"
+              >
+                <FileText className="h-4 w-4 text-orange-400" />
+                <span>{t.requisites.downloadProposalBtn}</span>
+              </button>
+            </div>
           </div>
 
           <div className="divide-y divide-white/10 font-mono text-xs">

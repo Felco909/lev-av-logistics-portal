@@ -1,19 +1,14 @@
 import React from 'react';
-import { Download, Facebook, Instagram, Flame, ShieldCheck } from 'lucide-react';
+import { Download, FileText, Facebook, Instagram, Flame, ShieldCheck } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { downloadCompanyCard, downloadCommercialProposal } from '../utils/documents';
 
 export default function Footer() {
   const { t, lang } = useLanguage();
   const t3 = (ru: string, en: string, hy: string) => (lang === 'ru' ? ru : lang === 'hy' ? hy : en);
 
-  const handleDownloadCard = () => {
-    const link = document.createElement('a');
-    link.href = `${import.meta.env.BASE_URL}documents/LEV_AV_Company_Card.docx`;
-    link.download = 'LEV_AV_Company_Card.docx';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  const handleDownloadCard = () => downloadCompanyCard(lang);
+  const handleDownloadProposal = () => downloadCommercialProposal(lang);
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -152,13 +147,20 @@ export default function Footer() {
                 </a>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-2 flex flex-wrap gap-2">
                 <button
                   onClick={handleDownloadCard}
                   className="inline-flex items-center space-x-2 text-[10px] text-black bg-orange-500 hover:bg-orange-600 px-3 py-1.5 font-mono font-bold transition uppercase tracking-wider cursor-pointer"
                 >
                   <Download className="h-3 w-3 text-black" />
                   <span>{t.footer.downloadBtn}</span>
+                </button>
+                <button
+                  onClick={handleDownloadProposal}
+                  className="inline-flex items-center space-x-2 text-[10px] text-white bg-[#111318] border border-white/15 hover:border-orange-500 hover:text-orange-400 px-3 py-1.5 font-mono font-bold transition uppercase tracking-wider cursor-pointer"
+                >
+                  <FileText className="h-3 w-3" />
+                  <span>{t.footer.downloadProposalBtn}</span>
                 </button>
               </div>
             </div>
