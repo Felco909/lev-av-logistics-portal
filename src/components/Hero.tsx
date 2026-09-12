@@ -71,8 +71,8 @@ N:Зограбян;Аветик;;;
 FN:Аветик Зограбян (LEV&AV LLC)
 ORG:ООО «ЛЕВ ЭНД АВ» (LEV&AV LLC);
 TITLE:Генеральный директор / CEO
-TEL;TYPE=CELL,VOICE:+37494902007
-TEL;TYPE=WORK,VOICE:+37499902007
+TEL;TYPE=CELL:+37494902007
+TEL;TYPE=WORK:+37499902007
 EMAIL:levavlogistics@gmail.com
 EMAIL:avet_avet83@mail.ru
 ADR;TYPE=WORK:;кв. 18;ул. С. Таронци 3/1;Ереван;;0046;Армения
@@ -85,8 +85,8 @@ N:Zohrabyan;Avetik;;;
 FN:Avetik Zohrabyan (LEV&AV LLC)
 ORG:LEV&AV LLC (ООО «ЛЕВ ЭНД АВ»);
 TITLE:CEO / General Director
-TEL;TYPE=CELL,VOICE:+37494902007
-TEL;TYPE=WORK,VOICE:+37499902007
+TEL;TYPE=CELL:+37494902007
+TEL;TYPE=WORK:+37499902007
 EMAIL:levavlogistics@gmail.com
 EMAIL:avet_avet83@mail.ru
 ADR;TYPE=WORK:;Apt. 18;S. Tarontsi St. 3/1;Yerevan;;0046;Armenia
@@ -99,8 +99,8 @@ N:Զոհրաբյան;Ավետիք;;;
 FN:Ավետիք Զոհրաբյան (LEV&AV LLC)
 ORG:«ԼԵՎ ԸՆԴ ԱՎ» ՍՊԸ (LEV&AV LLC);
 TITLE:Գլխավոր տնօրեն / CEO
-TEL;TYPE=CELL,VOICE:+37494902007
-TEL;TYPE=WORK,VOICE:+37499902007
+TEL;TYPE=CELL:+37494902007
+TEL;TYPE=WORK:+37499902007
 EMAIL:levavlogistics@gmail.com
 EMAIL:avet_avet83@mail.ru
 ADR;TYPE=WORK:;բն. 18;Ս. Տարոնցու փող. 3/1;Երևան;;0046;Հայաստան
@@ -112,7 +112,10 @@ END:VCARD`
     // vCard/RFC 6350 requires CRLF line breaks — template literals only produce
     // LF, which some contact-app parsers (notably several Android/desktop
     // importers) silently reject or render as an empty/unreadable card.
-    const blob = new Blob([vCardData.replace(/\n/g, '\r\n')], { type: 'text/vcard;charset=utf-8' });
+    // The leading BOM is required for Windows Contacts/Outlook to detect UTF-8:
+    // without it they fall back to the system codepage, misread the Cyrillic/
+    // Armenian fields, and then abort parsing before ever reaching the TEL lines.
+    const blob = new Blob(['﻿' + vCardData.replace(/\n/g, '\r\n')], { type: 'text/vcard;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;

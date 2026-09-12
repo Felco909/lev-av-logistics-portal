@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import Preloader from './components/Preloader';
 import Navbar from './components/Navbar';
@@ -9,6 +9,34 @@ import GeographySection from './components/GeographySection';
 import RequisitesSection from './components/RequisitesSection';
 import Footer from './components/Footer';
 import { Phone, X, Send, Check, MessageCircle, Mail, PhoneCall, ArrowRight, ShieldCheck } from 'lucide-react';
+import { ROUTES, ROUTE_CATEGORY_LIST, RouteCategory } from './data/logisticsData';
+
+const CUSTOM_ROUTE_VALUE = '__custom__';
+
+const CARGO_TYPES = [
+  { id: 'tent', label: { ru: 'Тент / Штора', en: 'Tautliner / Curtain', hy: 'Թենտ / Վարագույր' } },
+  { id: 'reefer', label: { ru: 'Рефрижератор', en: 'Reefer', hy: 'Սառնարան' } },
+  { id: 'heavy', label: { ru: 'Негабарит / Трал', en: 'Heavy / Lowbed', hy: 'Հանելուկ բեռ / Տրալ' } },
+  { id: 'container', label: { ru: 'Контейнер', en: 'Container', hy: 'Կոնտեյներ' } },
+  { id: 'ltl', label: { ru: 'Сборный груз (LTL)', en: 'Groupage (LTL)', hy: 'Հավաքական բեռ (LTL)' } },
+  { id: 'other', label: { ru: 'Другое', en: 'Other', hy: 'Այլ' } },
+] as const;
+
+const WEIGHT_PRESETS = [
+  { ru: 'до 5 т', en: 'up to 5 t', hy: 'մինչև 5 տ' },
+  { ru: '5–10 т', en: '5–10 t', hy: '5–10 տ' },
+  { ru: '10–20 т', en: '10–20 t', hy: '10–20 տ' },
+  { ru: '20+ т', en: '20+ t', hy: '20+ տ' },
+];
+
+const ROUTE_CATEGORY_LABELS: Record<RouteCategory, { ru: string; en: string; hy: string }> = {
+  russia: { ru: 'Россия', en: 'Russia', hy: 'Ռուսաստան' },
+  europe: { ru: 'Европа', en: 'Europe', hy: 'Եվրոպա' },
+  cis: { ru: 'СНГ', en: 'CIS', hy: 'ԱՊՀ' },
+  caucasus: { ru: 'Кавказ / Турция', en: 'Caucasus / Turkey', hy: 'Կովկաս / Թուրքիա' },
+  iran: { ru: 'Иран', en: 'Iran', hy: 'Իրան' },
+  asia: { ru: 'Центральная Азия / Китай', en: 'Central Asia / China', hy: 'Կենտրոնական Ասիա / Չինաստան' },
+};
 
 function AppContent() {
   const { t, lang } = useLanguage();
@@ -18,10 +46,24 @@ function AppContent() {
   const [contactName, setContactName] = useState('');
   const [contactPhone, setContactPhone] = useState('');
   const [contactRoute, setContactRoute] = useState('');
+  const [contactCargoType, setContactCargoType] = useState<string>('');
   const [contactWeight, setContactWeight] = useState('');
   const [isContactSuccess, setIsContactSuccess] = useState(false);
   const [autoSendBlocked, setAutoSendBlocked] = useState(false);
   const [showMessengerMenu, setShowMessengerMenu] = useState(false);
+
+  // Known route labels (matches what the map and route cards pass in) so the
+  // select can recognize a pre-filled value and highlight it, instead of
+  // always falling back to "custom route" for every external trigger.
+  const routeLabel = (r: (typeof ROUTES)[number]) => t3(r.labelRu, r.labelEn, r.labelHy);
+  const knownRouteLabels = useMemo(() => new Set(ROUTES.map(routeLabel)), [lang]);
+  const routeSelectValue = contactRoute
+    ? (knownRouteLabels.has(contactRoute) ? contactRoute : CUSTOM_ROUTE_VALUE)
+    : '';
+  const cargoTypeLabel = (id: string) => {
+    const found = CARGO_TYPES.find((c) => c.id === id);
+    return found ? t3(found.label.ru, found.label.en, found.label.hy) : '';
+  };
 
   const handleSendTelegram = () => {
     const text = encodeURIComponent(
@@ -30,17 +72,20 @@ function AppContent() {
           `👤 Имя / Компания: ${contactName || 'Не указано'}\n` +
           `📞 Телефон: ${contactPhone}\n` +
           `📍 Маршрут: ${contactRoute || 'Требуется консультация'}\n` +
+          `📦 Тип груза: ${cargoTypeLabel(contactCargoType) || 'Не указан'}\n` +
           `⚖️ Вес / Объем: ${contactWeight || 'По запросу'}`
         : lang === 'hy'
           ? `🚚 Նոր հայտ LEV&AV Logistics կայքից.\n` +
             `👤 Անուն / Ընկերություն: ${contactName || 'Նշված չէ'}\n` +
             `📞 Հեռախոս: ${contactPhone}\n` +
             `📍 Երթուղի: ${contactRoute || 'Անհրաժեշտ է խորհրդատվություն'}\n` +
+            `📦 Բեռի տեսակ: ${cargoTypeLabel(contactCargoType) || 'Նշված չէ'}\n` +
             `⚖️ Քաշ / Ծավալ: ${contactWeight || 'Ըստ պահանջի'}`
           : `🚚 New request from LEV&AV Logistics website:\n` +
             `👤 Name / Company: ${contactName || 'Not specified'}\n` +
             `📞 Phone: ${contactPhone}\n` +
             `📍 Route: ${contactRoute || 'Consultation needed'}\n` +
+            `📦 Cargo type: ${cargoTypeLabel(contactCargoType) || 'Not specified'}\n` +
             `⚖️ Weight / Volume: ${contactWeight || 'On request'}`
     );
     return window.open(`https://t.me/+37499902007?text=${text}`, '_blank');
@@ -53,17 +98,20 @@ function AppContent() {
           `Имя: ${contactName}\n` +
           `Телефон: ${contactPhone}\n` +
           `Маршрут: ${contactRoute || 'Консультация'}\n` +
+          `Тип груза: ${cargoTypeLabel(contactCargoType) || '-'}\n` +
           `Параметры груза: ${contactWeight || '-'}`
         : lang === 'hy'
           ? `Բարև Ձեզ! Հայտ՝ LEV&AV փոխադրման հաշվարկի համար.\n` +
             `Անուն: ${contactName}\n` +
             `Հեռախոս: ${contactPhone}\n` +
             `Երթուղի: ${contactRoute || 'Խորհրդատվություն'}\n` +
+            `Բեռի տեսակ: ${cargoTypeLabel(contactCargoType) || '-'}\n` +
             `Բեռի պարամետրեր: ${contactWeight || '-'}`
           : `Hello! Freight quote request for LEV&AV:\n` +
             `Name: ${contactName}\n` +
             `Phone: ${contactPhone}\n` +
             `Route: ${contactRoute || 'Consultation'}\n` +
+            `Cargo type: ${cargoTypeLabel(contactCargoType) || '-'}\n` +
             `Cargo details: ${contactWeight || '-'}`
     );
     return window.open(`https://wa.me/37499902007?text=${text}`, '_blank');
@@ -82,15 +130,18 @@ function AppContent() {
         ? `Имя / Компания: ${contactName}\n` +
           `Телефон: ${contactPhone}\n` +
           `Маршрут: ${contactRoute}\n` +
+          `Тип груза: ${cargoTypeLabel(contactCargoType)}\n` +
           `Вес / Объем: ${contactWeight}\n`
         : lang === 'hy'
           ? `Անուն / Ընկերություն: ${contactName}\n` +
             `Հեռախոս: ${contactPhone}\n` +
             `Երթուղի: ${contactRoute}\n` +
+            `Բեռի տեսակ: ${cargoTypeLabel(contactCargoType)}\n` +
             `Քաշ / Ծավալ: ${contactWeight}\n`
           : `Name / Company: ${contactName}\n` +
             `Phone: ${contactPhone}\n` +
             `Route: ${contactRoute}\n` +
+            `Cargo type: ${cargoTypeLabel(contactCargoType)}\n` +
             `Weight / Volume: ${contactWeight}\n`
     );
     window.location.href = `mailto:levavlogistics@gmail.com?subject=${subject}&body=${body}`;
@@ -303,6 +354,7 @@ function AppContent() {
                     setContactName('');
                     setContactPhone('');
                     setContactRoute('');
+                    setContactCargoType('');
                     setContactWeight('');
                   }}
                   className="w-full bg-orange-500 hover:bg-orange-600 text-black text-xs font-mono uppercase tracking-widest py-3 font-black transition cursor-pointer mt-4"
@@ -326,44 +378,122 @@ function AppContent() {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[9px] font-mono font-bold text-[#888] uppercase tracking-wider mb-1.5">
-                      {t3('Телефон / Мессенджер *', 'Phone / WhatsApp *', 'Հեռախոս / Մեսենջեր *')}
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      placeholder="+7 / +374 ..."
-                      value={contactPhone}
-                      onChange={(e) => setContactPhone(e.target.value)}
-                      className="w-full bg-[#08090b] border border-white/15 px-3.5 py-2.5 text-sm text-white placeholder-[#555] outline-none focus:border-orange-500 font-mono"
-                    />
-                  </div>
+                <div>
+                  <label className="block text-[9px] font-mono font-bold text-[#888] uppercase tracking-wider mb-1.5">
+                    {t3('Телефон / Мессенджер *', 'Phone / WhatsApp *', 'Հեռախոս / Մեսենջեր *')}
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    placeholder="+7 / +374 ..."
+                    value={contactPhone}
+                    onChange={(e) => setContactPhone(e.target.value)}
+                    className="w-full bg-[#08090b] border border-white/15 px-3.5 py-2.5 text-sm text-white placeholder-[#555] outline-none focus:border-orange-500 font-mono"
+                  />
+                </div>
 
-                  <div>
-                    <label className="block text-[9px] font-mono font-bold text-[#888] uppercase tracking-wider mb-1.5">
-                      {t3('Вес / Объем груза', 'Weight / Volume', 'Բեռի քաշը / Ծավալը')}
-                    </label>
+                <div>
+                  <label className="block text-[9px] font-mono font-bold text-[#888] uppercase tracking-wider mb-1.5">
+                    {t3('Направление', 'Route', 'Ուղղություն')}
+                  </label>
+                  <select
+                    value={routeSelectValue}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      if (val === CUSTOM_ROUTE_VALUE) {
+                        if (knownRouteLabels.has(contactRoute)) setContactRoute('');
+                      } else {
+                        setContactRoute(val);
+                      }
+                    }}
+                    className="w-full bg-[#08090b] border border-white/15 px-3.5 py-2.5 text-sm text-white outline-none focus:border-orange-500 font-mono cursor-pointer"
+                  >
+                    <option value="" disabled>
+                      {t3('Выберите направление...', 'Select a route...', 'Ընտրեք ուղղությունը...')}
+                    </option>
+                    {ROUTE_CATEGORY_LIST.map((category) => (
+                      <optgroup key={category} label={t3(ROUTE_CATEGORY_LABELS[category].ru, ROUTE_CATEGORY_LABELS[category].en, ROUTE_CATEGORY_LABELS[category].hy)}>
+                        {ROUTES.filter((r) => r.category === category).map((r) => {
+                          const label = routeLabel(r);
+                          return (
+                            <option key={r.id} value={label}>
+                              {label}
+                            </option>
+                          );
+                        })}
+                      </optgroup>
+                    ))}
+                    <option value={CUSTOM_ROUTE_VALUE}>
+                      {t3('Другое направление...', 'Other route...', 'Այլ ուղղություն...')}
+                    </option>
+                  </select>
+
+                  {routeSelectValue === CUSTOM_ROUTE_VALUE && (
                     <input
                       type="text"
-                      placeholder={t3('20 тонн, 86 м³, 33 паллеты', '20 tons, 86 m³', '20 տոննա, 86 մ³, 33 պալլետ')}
-                      value={contactWeight}
-                      onChange={(e) => setContactWeight(e.target.value)}
-                      className="w-full bg-[#08090b] border border-white/15 px-3.5 py-2.5 text-sm text-white placeholder-[#555] outline-none focus:border-orange-500 font-mono"
+                      autoFocus
+                      placeholder={t3('Опишите маршрут, например Ереван → Прага', 'Describe your route, e.g. Yerevan → Prague', 'Նկարագրեք երթուղին, օրինակ՝ Երևան → Պրահա')}
+                      value={contactRoute}
+                      onChange={(e) => setContactRoute(e.target.value)}
+                      className="w-full bg-[#08090b] border border-white/15 px-3.5 py-2.5 text-sm text-white placeholder-[#555] outline-none focus:border-orange-500 font-mono mt-2"
                     />
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-[9px] font-mono font-bold text-[#888] uppercase tracking-wider mb-1.5">
+                    {t3('Тип груза', 'Cargo Type', 'Բեռի տեսակ')}
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    {CARGO_TYPES.map((ct) => {
+                      const isSelected = contactCargoType === ct.id;
+                      return (
+                        <button
+                          key={ct.id}
+                          type="button"
+                          onClick={() => setContactCargoType(isSelected ? '' : ct.id)}
+                          className={`px-3 py-1.5 text-[11px] font-mono font-bold uppercase tracking-wide border transition cursor-pointer ${
+                            isSelected
+                              ? 'bg-orange-500 text-black border-orange-400'
+                              : 'bg-[#08090b] text-[#aaa] border-white/15 hover:border-orange-500/50 hover:text-white'
+                          }`}
+                        >
+                          {t3(ct.label.ru, ct.label.en, ct.label.hy)}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-[9px] font-mono font-bold text-[#888] uppercase tracking-wider mb-1.5">
-                    {t3('Маршрут и тип груза', 'Route & Cargo Type', 'Երթուղի և բեռի տեսակ')}
+                    {t3('Вес / Объем груза', 'Weight / Volume', 'Բեռի քաշը / Ծավալը')}
                   </label>
+                  <div className="flex flex-wrap gap-1.5 mb-1.5">
+                    {WEIGHT_PRESETS.map((preset) => {
+                      const label = t3(preset.ru, preset.en, preset.hy);
+                      const isSelected = contactWeight === label;
+                      return (
+                        <button
+                          key={label}
+                          type="button"
+                          onClick={() => setContactWeight(label)}
+                          className={`px-2.5 py-1 text-[10px] font-mono font-bold border transition cursor-pointer ${
+                            isSelected
+                              ? 'bg-orange-500 text-black border-orange-400'
+                              : 'bg-[#08090b] text-[#888] border-white/15 hover:border-orange-500/50 hover:text-white'
+                          }`}
+                        >
+                          {label}
+                        </button>
+                      );
+                    })}
+                  </div>
                   <input
                     type="text"
-                    placeholder={t3('Ереван → Москва (Тент / Рефрижератор)', 'Yerevan → Moscow (Reefer / Tent)', 'Երևան → Մոսկվա (Թենտ / Սառնարան)')}
-                    value={contactRoute}
-                    onChange={(e) => setContactRoute(e.target.value)}
+                    placeholder={t3('20 тонн, 86 м³, 33 паллеты', '20 tons, 86 m³', '20 տոննա, 86 մ³, 33 պալլետ')}
+                    value={contactWeight}
+                    onChange={(e) => setContactWeight(e.target.value)}
                     className="w-full bg-[#08090b] border border-white/15 px-3.5 py-2.5 text-sm text-white placeholder-[#555] outline-none focus:border-orange-500 font-mono"
                   />
                 </div>
