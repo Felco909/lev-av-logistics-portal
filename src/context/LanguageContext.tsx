@@ -148,7 +148,6 @@ export const translations = {
       adminMessengersLabel: 'Мессенджеры',
       workingHours: 'График: Пн-Сб 09:00 - 19:00',
       timezone: 'Ереван (GMT+4)',
-      downloadCardBtn: 'Сохранить контакт (.vcf)',
     },
     history: {
       header: 'Наш путь и принципы',
@@ -661,7 +660,6 @@ export const translations = {
       adminMessengersLabel: 'Messengers',
       workingHours: 'Hours: Mon-Sat 09:00 - 19:00',
       timezone: 'Yerevan (GMT+4)',
-      downloadCardBtn: 'Save Contact (.vcf)',
     },
     history: {
       header: 'Our Milestone & Core Values',
@@ -1174,7 +1172,6 @@ export const translations = {
       adminMessengersLabel: 'Մեսենջերներ',
       workingHours: 'Աշխատանքային ժամեր՝ Երկ-Շբթ 09:00 - 19:00',
       timezone: 'Երևան (GMT+4)',
-      downloadCardBtn: 'Պահպանել կոնտակտը (.vcf)',
     },
     history: {
       header: 'Մեր ուղին և սկզբունքները',

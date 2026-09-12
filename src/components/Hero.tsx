@@ -8,9 +8,8 @@ import {
   FileText, 
   Phone, 
   Mail, 
-  MessageSquare, 
-  Download, 
-  Shield, 
+  MessageSquare,
+  Shield,
   Clock, 
   Globe2, 
   ArrowRight, 
@@ -57,73 +56,6 @@ export default function Hero({ onContactClick }: HeroProps) {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
-  };
-
-  const handleDownloadCard = () => {
-    // Derived from the page's own origin (not hardcoded) so this stays correct on
-    // every deployment target — GitHub Pages, Cloudflare Pages, or any future custom
-    // domain — without ever needing another manual fix here again.
-    const siteUrl = window.location.origin + import.meta.env.BASE_URL;
-    const vCardData = t3(
-      `BEGIN:VCARD
-VERSION:3.0
-N:Зограбян;Аветик;;;
-FN:Аветик Зограбян (LEV&AV LLC)
-ORG:ООО «ЛЕВ ЭНД АВ» (LEV&AV LLC);
-TITLE:Генеральный директор / CEO
-TEL;TYPE=CELL:+37494902007
-TEL;TYPE=WORK:+37499902007
-EMAIL:levavlogistics@gmail.com
-EMAIL:avet_avet83@mail.ru
-ADR;TYPE=WORK:;кв. 18;ул. С. Таронци 3/1;Ереван;;0046;Армения
-URL:${siteUrl}
-NOTE:Международные грузоперевозки собственным автопарком по СНГ, Европе и Китаю с 2010 года.
-END:VCARD`,
-      `BEGIN:VCARD
-VERSION:3.0
-N:Zohrabyan;Avetik;;;
-FN:Avetik Zohrabyan (LEV&AV LLC)
-ORG:LEV&AV LLC (ООО «ЛЕВ ЭНД АВ»);
-TITLE:CEO / General Director
-TEL;TYPE=CELL:+37494902007
-TEL;TYPE=WORK:+37499902007
-EMAIL:levavlogistics@gmail.com
-EMAIL:avet_avet83@mail.ru
-ADR;TYPE=WORK:;Apt. 18;S. Tarontsi St. 3/1;Yerevan;;0046;Armenia
-URL:${siteUrl}
-NOTE:International freight forwarding with our own fleet across the CIS, Europe and China since 2010.
-END:VCARD`,
-      `BEGIN:VCARD
-VERSION:3.0
-N:Զոհրաբյան;Ավետիք;;;
-FN:Ավետիք Զոհրաբյան (LEV&AV LLC)
-ORG:«ԼԵՎ ԸՆԴ ԱՎ» ՍՊԸ (LEV&AV LLC);
-TITLE:Գլխավոր տնօրեն / CEO
-TEL;TYPE=CELL:+37494902007
-TEL;TYPE=WORK:+37499902007
-EMAIL:levavlogistics@gmail.com
-EMAIL:avet_avet83@mail.ru
-ADR;TYPE=WORK:;բն. 18;Ս. Տարոնցու փող. 3/1;Երևան;;0046;Հայաստան
-URL:${siteUrl}
-NOTE:Միջազգային բեռնափոխադրումներ սեփական ավտոպարկով ԱՊՀ, Եվրոպա և Չինաստան ուղղություններով 2010 թվականից։
-END:VCARD`
-    );
-
-    // vCard/RFC 6350 requires CRLF line breaks — template literals only produce
-    // LF, which some contact-app parsers (notably several Android/desktop
-    // importers) silently reject or render as an empty/unreadable card.
-    // The leading BOM is required for Windows Contacts/Outlook to detect UTF-8:
-    // without it they fall back to the system codepage, misread the Cyrillic/
-    // Armenian fields, and then abort parsing before ever reaching the TEL lines.
-    const blob = new Blob(['﻿' + vCardData.replace(/\n/g, '\r\n')], { type: 'text/vcard;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', 'LEV_AV_Logistics_Contacts.vcf');
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
   };
 
   const containerVariants = {
@@ -890,17 +822,6 @@ END:VCARD`
                   </div>
                 </div>
 
-              </div>
-
-              {/* Download Profile Card Button */}
-              <div className="mt-12 flex justify-center">
-                <button
-                  onClick={handleDownloadCard}
-                  className="inline-flex items-center space-x-3 bg-orange-500 hover:bg-orange-600 text-black border border-orange-400 px-8 py-4 text-xs font-mono font-extrabold uppercase tracking-widest transition shadow-xl cursor-pointer"
-                >
-                  <Download className="h-4 w-4 text-black animate-bounce" />
-                  <span>{t.hero.downloadCardBtn}</span>
-                </button>
               </div>
 
             </div>
